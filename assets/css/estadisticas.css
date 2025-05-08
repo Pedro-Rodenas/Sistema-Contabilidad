@@ -1,0 +1,125 @@
+/* Paleta sugerida */
+:root {
+    --primary: #1f2937;     /* Gris oscuro */
+    --accent: #3b82f6;      /* Azul profesional */
+    --neutral: #e5e7eb;     /* Gris claro */
+    --success: #10b981;     /* Verde suave */
+    --danger: #ef4444;      /* Rojo claro */
+    --background: #f9fafb;  /* Fondo general */
+    --white: #ffffff;
+}
+
+
+.a-estadisticas {
+    width: 100%;
+    background-color: #569b45;
+}
+
+/* Título principal */
+main>h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+}
+
+/* Select año */
+main>label {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+main>select {
+    display: block;
+    margin: 0 auto 2rem auto;
+    padding: 0.6rem 3rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 1rem;
+}
+
+/* Tarjetas estadísticas */
+.estadisticas-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.tarjeta-estadistica {
+    flex: 1;
+    background: #ffffff;
+    border-left: 6px solid #2a9d8f;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    text-align: center;
+}
+
+.tarjeta-estadistica:hover {
+    transform: translateY(-5px);
+}
+
+.titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #34495e;
+}
+
+.dato {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #27ae60;
+}
+
+/* Gráficos */
+.titulo-grafico {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+.grafico-lineas,
+.grafico-pastel {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.336);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Canvas específico */
+canvas#graficoLineas {
+    width: 100% !important;
+    height: auto !important;
+    background-color: #fefefe;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.sub-graficos {
+    margin-block: 1rem;
+    width: 100%;
+    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grafico-pastel {
+    width: 100% !important;
+    height: auto !important;
+    background-color: #fefefe;
+    border-radius: 10px;
+    padding: 1rem;
+}

@@ -1,0 +1,107 @@
+.form-section {
+    padding: 0 10rem;
+}
+
+.form-section h1 {
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    color: #333;
+    text-align: center;
+}
+
+.form-egreso {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-block: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-block-end: 1rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-group.doble {
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.form-group.doble>div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+button[type="submit"] {
+    background-color: var(--color_header);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #569b45;
+}
+
+#tipo_egreso {
+    padding: 0.7rem;
+    cursor: pointer;
+}
+
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.select-wrapper select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0.7rem 2.5rem 0.7rem 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+}
+
+.select-wrapper::after {
+    content: '▼';
+    position: absolute;
+    top: 50%;
+    right: 0.8rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 0.8rem;
+    color: #666;
+}
+.a-registrar-egreso{
+    width: 100%;
+    background-color: #569b45;
+}
