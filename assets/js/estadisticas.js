@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Versión de Chart.js:', Chart.version);
     cargarEstadisticas();
     document.getElementById('ano').addEventListener('change', cargarEstadisticas);
 });
@@ -14,14 +13,12 @@ function cargarEstadisticas() {
     fetch(`../controller/EstadisticasController.php?ano=${anoSeleccionado}`)
         .then(response => response.json())
         .then(data => {
-            console.log('Datos recibidos:', data);
 
-            // Mostrar estadísticas individuales
             document.getElementById('mes-mas-gasto').textContent = data.mes_mas_gasto || '---';
             document.getElementById('producto-mas-caro').textContent = data.producto_mas_caro || '---';
             document.getElementById('mes-menos-gasto').textContent = data.mes_menos_gasto || '---';
 
-            // === GRÁFICO DE LÍNEAS ===
+
             const meses = data.grafico_lineas.map(item => item.mes);
             const totales = data.grafico_lineas.map(item => item.total);
 
@@ -58,7 +55,7 @@ function cargarEstadisticas() {
                         },
                         legend: {
                             labels: {
-                                color: '#000000' // Leyendas en negro
+                                color: '#000000'
                             }
                         }
                     },
@@ -83,7 +80,7 @@ function cargarEstadisticas() {
                 }
             });
 
-            // === GRÁFICO DE PASTEL ===
+
             const pastelLabels = data.grafico_pastel.map(item => item.tipo);
             const pastelDatos = data.grafico_pastel.map(item => parseFloat(item.total));
 
@@ -115,16 +112,15 @@ function cargarEstadisticas() {
                         },
                         legend: {
                             labels: {
-                                color: '#000000' // Leyendas en negro
+                                color: '#000000'
                             }
                         }
                     }
                 }
             });
 
-            // === GRÁFICO DONUT DE COMPARACIÓN ANUAL ===
+
             const { actual, anterior } = data.comparacion_anual;
-            console.log('Comparación anual:', actual, anterior);
 
             const variacion = anterior > 0 ? ((actual - anterior) / anterior) * 100 : 0;
             const aumento = variacion >= 0;

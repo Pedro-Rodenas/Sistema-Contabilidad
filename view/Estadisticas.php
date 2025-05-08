@@ -59,6 +59,7 @@
                     <canvas id="gráficoDonut"></canvas>
                 </div>
                 <div class="grafico-pastel">
+                    <h2>Gráfico que se cambiará</h2>
                     <canvas id="grafico3"></canvas>
                 </div>
             </section>
