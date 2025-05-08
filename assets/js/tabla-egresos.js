@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const añoSelect = document.getElementById('year');
     const mesSelect = document.getElementById('month');
     const tablaBody = document.getElementById('tabla-body');
-    const totalEgresos = document.getElementById('total-egresos');
     const formEditar = document.getElementById('form-editar');
     const modal = document.getElementById('modal');
 
@@ -94,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(res => res.text())
                     .then(msg => {
                         if (msg.includes('correctamente')) {
-                            cargarEgresos();
+                            location.reload();
                         } else {
                             mostrarMensaje('No se pudo eliminar: ' + msg, 'error');
                         }
