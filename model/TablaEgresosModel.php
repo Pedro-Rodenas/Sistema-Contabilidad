@@ -19,11 +19,12 @@ class TablaEgresosModel
             SELECT 
                 id_producto AS id,
                 fecha_compra AS fecha,
-                'Producto' AS tipo,
+                tipo AS tipo,
+                'Producto' AS tipo_ps,
                 nombre_producto AS nombre,
                 cant_productos AS cantidad,
                 precio_producto AS precio,
-                descripcion
+                igv AS igv
             FROM egresos_productos
             WHERE YEAR(fecha_compra) = :anio AND MONTH(fecha_compra) = :mes
         ";
@@ -40,12 +41,13 @@ class TablaEgresosModel
             SELECT 
                 id_servicio AS id,
                 fecha_servicio AS fecha,
-                'Servicio' AS tipo,
+                tipo AS tipo,
+                'Servicio' AS tipo_ps,
                 nombre_servicio AS nombre,
                 NULL AS cantidad,
-                periodo_consumo AS cantidad,  -- Aquí agregamos periodo_consumo para los servicios
+                periodo_consumo AS cantidad,
                 precio_servicio AS precio,
-                descripcion
+                igv AS igv
             FROM egresos_servicios
             WHERE YEAR(fecha_servicio) = :anio AND MONTH(fecha_servicio) = :mes
         ";
@@ -60,6 +62,7 @@ class TablaEgresosModel
         return $egresos;
     }
 
+    /* Metodo para editar productos */
     public function editarProducto($id, $nombre, $cantidad, $precio)
     {
         $query = "
@@ -79,6 +82,7 @@ class TablaEgresosModel
         ]);
     }
 
+    /* Metodo para editar Servicio */
     public function editarServicio($id, $nombre, $periodo, $precio)
     {
         $query = "

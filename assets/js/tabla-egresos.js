@@ -27,29 +27,41 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(res => res.ok ? res.json() : Promise.reject('Error al cargar los egresos'))
             .then(data => {
                 tablaBody.innerHTML = '';
-                totalEgresos.innerHTML = '<strong>S/. 0.00</strong>';
-
                 if (!data.length) {
-                    tablaBody.innerHTML = '<tr><td colspan="6">No hay egresos en este mes.</td></tr>';
+                    tablaBody.innerHTML = '<tr><td colspan="8">No hay egresos en este mes.</td></tr>';
+                    document.querySelector('.totales-egresos').style.display = 'block';
                     return;
                 }
 
+
                 data.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
                 const fragment = document.createDocumentFragment();
-                let total = 0;
+                let totalPrecio = 0;
+                let totalIGV = 0;
+                let totalConIGV = 0;
+
 
                 data.forEach(row => {
                     const tr = document.createElement('tr');
                     if (row.estado === 'anulado') tr.classList.add('fila-inactiva');
-                    const precio = parseFloat(row.precio);
-                    total += precio;
+                    const precio = parseFloat(row.precio) || 0;
+                    const igv = parseFloat(row.igv) || 0;
+                    const total = precio + igv;
+
+                    totalPrecio += precio;
+                    totalIGV += igv;
+                    totalConIGV += total;
+
 
                     tr.innerHTML = `
                         <td>${row.fecha}</td>
                         <td>${row.tipo}</td>
+                        <td>${row.tipo_ps}</td>
                         <td>${row.nombre}</td>
                         <td>${row.cantidad ?? 'N/A'}</td>
                         <td>S/. ${precio.toFixed(2)}</td>
+                        <td>S/. ${row.igv}</td>
+                        <td><strong>S/. ${total.toFixed(2)}</strong></td>
                         <td>
                             <button class="btn-editar" onclick='abrirModal(${JSON.stringify(row)})'>Editar</button>
                             <button class="btn-eliminar" data-id="${row.id}" data-tipo="${row.tipo}">Eliminar</button>
@@ -59,7 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 tablaBody.appendChild(fragment);
-                totalEgresos.innerHTML = `<strong>S/. ${total.toFixed(2)}</strong>`;
+                document.getElementById('total-precio').textContent = `S/. ${totalPrecio.toFixed(2)}`;
+                document.getElementById('total-igv').textContent = `S/. ${totalIGV.toFixed(2)}`;
+                document.getElementById('total-con-igv').textContent = `S/. ${totalConIGV.toFixed(2)}`;
                 agregarListenersEliminar();
             })
             .catch(err => console.error('Error al cargar los egresos:', err));

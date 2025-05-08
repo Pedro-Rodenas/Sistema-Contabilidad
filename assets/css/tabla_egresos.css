@@ -167,3 +167,32 @@ button {
     text-decoration: line-through;
     font-style: italic;
 }
+
+.totales-egresos {
+    margin-left: auto;
+    width: 40%;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    font-size: 1rem;
+    color: #1e3d2f;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+.totales-egresos p {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.7rem 0;
+    font-weight: 600;
+    border-bottom: 1px dashed #b5d8bb;
+    padding-bottom: 5px;
+}
+
+.totales-egresos p:last-child {
+    border-bottom: none;
+}
+
+.totales-egresos span {
+    font-weight: bold;
+    color: #205732;
+}

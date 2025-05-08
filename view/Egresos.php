@@ -50,25 +50,25 @@
                 <thead>
                     <tr>
                         <th>Fecha</th>
-                        <th>Tipo</th>
+                        <th>Comprobante</th>
+                        <th>Tipo de Egreso</th>
                         <th>Nombre</th>
                         <th>Cantidad</th>
-                        <th>Precio</th>
+                        <th>Base imponible</th>
+                        <th>Igv (18%)</th>
+                        <th>Total</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="tabla-body">
                     <!-- Aquí se llenan los datos -->
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4"></td>
-                        <td><strong>Total:</strong></td>
-                        <td colspan="2" id="total-egresos"><strong>S/. 0.00</strong></td>
-                    </tr>
-                </tfoot>
-
             </table>
+            <div class="totales-egresos">
+                <p><strong>Total sin IGV:</strong> <span id="total-precio">S/. 0.00</span></p>
+                <p><strong>Total IGV:</strong> <span id="total-igv">S/. 0.00</span></p>
+                <p><strong>Total con IGV:</strong> <span id="total-con-igv">S/. 0.00</span></p>
+            </div>
 
         </section>
 
