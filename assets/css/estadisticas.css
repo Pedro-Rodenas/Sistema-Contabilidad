@@ -1,11 +1,17 @@
 /* Paleta sugerida */
 :root {
-    --primary: #1f2937;     /* Gris oscuro */
-    --accent: #3b82f6;      /* Azul profesional */
-    --neutral: #e5e7eb;     /* Gris claro */
-    --success: #10b981;     /* Verde suave */
-    --danger: #ef4444;      /* Rojo claro */
-    --background: #f9fafb;  /* Fondo general */
+    --primary: #1f2937;
+    /* Gris oscuro */
+    --accent: #3b82f6;
+    /* Azul profesional */
+    --neutral: #e5e7eb;
+    /* Gris claro */
+    --success: #10b981;
+    /* Verde suave */
+    --danger: #ef4444;
+    /* Rojo claro */
+    --background: #f9fafb;
+    /* Fondo general */
     --white: #ffffff;
 }
 
@@ -88,8 +94,7 @@ main>select {
     margin-bottom: 1.5rem;
 }
 
-.grafico-lineas,
-.grafico-pastel {
+.grafico-lineas {
     background-color: #ffffff;
     padding: 1.5rem;
     border-radius: 12px;
@@ -118,9 +123,16 @@ canvas#graficoLineas {
 }
 
 .grafico-pastel {
-    width: 100% !important;
-    height: auto !important;
-    background-color: #fefefe;
-    border-radius: 10px;
-    padding: 1rem;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.336);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.grafico-pastel h2{
+    margin-block: 1rem;
 }

@@ -51,9 +51,11 @@
             </div>
             <section class="sub-graficos">
                 <div class="grafico-pastel">
+                    <h2>Productos y Servicios</h2>
                     <canvas id="graficoPastel"></canvas>
                 </div>
                 <div class="grafico-pastel">
+                    <h2>Comparación Año Pasado</h2>
                     <canvas id="gráficoDonut"></canvas>
                 </div>
                 <div class="grafico-pastel">
