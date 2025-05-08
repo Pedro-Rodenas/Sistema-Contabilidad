@@ -19,12 +19,18 @@ class TablaEgresosModel
             SELECT 
                 id_producto AS id,
                 fecha_compra AS fecha,
-                tipo AS tipo,
-                'Producto' AS tipo_ps,
+                'Producto' AS tipo_egreso,
                 nombre_producto AS nombre,
                 cant_productos AS cantidad,
                 precio_producto AS precio,
-                igv AS igv
+                igv,
+                tipo AS tipo_factura,
+                descripcion,
+                ruc,
+                razon_social,
+                nro_factura,
+                tipo_producto AS tipo_origen,
+                estado
             FROM egresos_productos
             WHERE YEAR(fecha_compra) = :anio AND MONTH(fecha_compra) = :mes
         ";
@@ -41,13 +47,18 @@ class TablaEgresosModel
             SELECT 
                 id_servicio AS id,
                 fecha_servicio AS fecha,
-                tipo AS tipo,
-                'Servicio' AS tipo_ps,
+                'Servicio' AS tipo_egreso,
                 nombre_servicio AS nombre,
-                NULL AS cantidad,
                 periodo_consumo AS cantidad,
                 precio_servicio AS precio,
-                igv AS igv
+                igv,
+                tipo AS tipo_factura,
+                descripcion,
+                ruc,
+                razon_social,
+                nro_factura,
+                tipo_servicio AS tipo_origen,
+                estado
             FROM egresos_servicios
             WHERE YEAR(fecha_servicio) = :anio AND MONTH(fecha_servicio) = :mes
         ";
@@ -62,14 +73,15 @@ class TablaEgresosModel
         return $egresos;
     }
 
-    /* Metodo para editar productos */
-    public function editarProducto($id, $nombre, $cantidad, $precio)
+
+    public function editarProducto($id, $nombre, $cantidad, $precio, $igv)
     {
         $query = "
         UPDATE egresos_productos 
         SET nombre_producto = :nombre, 
             cant_productos = :cantidad, 
-            precio_producto = :precio 
+            precio_producto = :precio,
+            igv = :igv 
         WHERE id_producto = :id
     ";
 
@@ -78,18 +90,19 @@ class TablaEgresosModel
             ':nombre' => $nombre,
             ':cantidad' => $cantidad,
             ':precio' => $precio,
+            ':igv' => $igv,
             ':id' => $id
         ]);
     }
 
-    /* Metodo para editar Servicio */
-    public function editarServicio($id, $nombre, $periodo, $precio)
+    public function editarServicio($id, $nombre, $periodo, $precio, $igv)
     {
         $query = "
         UPDATE egresos_servicios 
         SET nombre_servicio = :nombre, 
             periodo_consumo = :periodo, 
-            precio_servicio = :precio 
+            precio_servicio = :precio,
+            igv = :igv
         WHERE id_servicio = :id
     ";
 
@@ -98,6 +111,7 @@ class TablaEgresosModel
             ':nombre' => $nombre,
             ':periodo' => $periodo,
             ':precio' => $precio,
+            ':igv' => $igv,
             ':id' => $id
         ]);
     }

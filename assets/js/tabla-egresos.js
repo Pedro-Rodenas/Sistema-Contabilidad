@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     tr.innerHTML = `
                         <td>${row.fecha}</td>
-                        <td>${row.tipo}</td>
-                        <td>${row.tipo_ps}</td>
+                        <td>${row.tipo_factura}</td>
+                        <td>${row.tipo_egreso}</td>
                         <td>${row.nombre}</td>
                         <td>${row.cantidad ?? 'N/A'}</td>
                         <td>S/. ${precio.toFixed(2)}</td>
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td><strong>S/. ${total.toFixed(2)}</strong></td>
                         <td>
                             <button class="btn-editar" onclick='abrirModal(${JSON.stringify(row)})'>Editar</button>
-                            <button class="btn-eliminar" data-id="${row.id}" data-tipo="${row.tipo}">Eliminar</button>
+                            <button class="btn-eliminar" data-id="${row.id}" data-tipo="${row.tipo_egreso}">Eliminar</button>
                         </td>
                     `;
                     fragment.appendChild(tr);
@@ -124,7 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('editar-nombre').value = egreso.nombre;
         document.getElementById('editar-cantidad').value = egreso.cantidad ?? '';
         document.getElementById('editar-precio').value = egreso.precio;
-        document.getElementById('editar-origen').value = egreso.tipo;
+        document.getElementById('editar-igv').value = egreso.igv ?? '';
+        document.getElementById('editar-origen').value = egreso.tipo_egreso;
         modal.style.display = 'block';
     };
 

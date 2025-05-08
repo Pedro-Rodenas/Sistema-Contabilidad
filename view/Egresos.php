@@ -86,6 +86,9 @@
                 <label>Precio:</label>
                 <input type="text" id="editar-precio" name="precio">
 
+                <label>Igv:</label>
+                <input type="text" id="editar-igv" name="igv">
+
                 <button type="submit">Guardar</button>
                 <button type="button" onclick="cerrarModal()">Cancelar</button>
             </form>
