@@ -46,8 +46,15 @@
                 </div>
 
                 <div class="form-group doble">
+                    <div class="form-group">
+                        <label for="Tipo">Tipo De Recibo</label>
+                        <select class="select-serie" name="tipo" id="tipo">
+                            <option value="Factura">Factura</option>
+                            <option value="Boleta">Boleta</option>
+                        </select>
+                    </div>
                     <div>
-                        <label for="nro_factura">N° Factura:</label>
+                        <label for="nro_factura">N° Serie:</label>
                         <input type="text" name="nro_factura" required>
                     </div>
                     <div>
@@ -98,7 +105,14 @@
                 </div>
                 <div class="form-group doble">
                     <div class="form-group">
-                        <label for="nro_factura">N° Factura:</label>
+                        <label for="Tipo">Tipo De Recibo</label>
+                        <select class="select-serie" name="tipo" id="tipo">
+                            <option value="Factura">Factura</option>
+                            <option value="Boleta">Boleta</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nro_factura">N° Serie:</label>
                         <input type="text" name="nro_factura" required>
                     </div>
                     <div class="form-group">
