@@ -67,8 +67,12 @@
                         <input type="text" name="cantidad" required>
                     </div>
                     <div>
-                        <label for="precio">Precio:</label>
+                        <label for="precio">Valor de Venta:</label>
                         <input type="number" step="0.01" name="precio" required>
+                    </div>
+                    <div>
+                        <label for="precio">IGV (18%):</label>
+                        <input type="number" step="0.01" name="igv" required>
                     </div>
                 </div>
 
@@ -112,8 +116,12 @@
                         <input type="text" name="periodo_consumo" required>
                     </div>
                     <div class="form-group">
-                        <label for="precio">Precio:</label>
+                        <label for="precio">Valor de Servicio:</label>
                         <input type="number" step="0.01" name="precio" required>
+                    </div>
+                    <div>
+                        <label for="precio">IGV (18%):</label>
+                        <input type="number" step="0.01" name="igv" required>
                     </div>
                 </div>
 

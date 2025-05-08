@@ -12,17 +12,17 @@ class RegistrarProductoModel
         $this->conn = $db->connect();
     }
 
-    public function setData($ruc, $razon_social, $nro_factura, $fecha_compra, $nombre, $cantidad, $precio, $descripcion)
+    public function setData($ruc, $razon_social, $nro_factura, $fecha_compra, $nombre, $cantidad, $precio, $descripcion, $igv)
     {
-        $this->data = compact('ruc', 'razon_social', 'nro_factura', 'fecha_compra', 'nombre', 'cantidad', 'precio', 'descripcion');
+        $this->data = compact('ruc', 'razon_social', 'nro_factura', 'fecha_compra', 'nombre', 'cantidad', 'precio', 'descripcion', 'igv');
     }
 
     public function registrar()
     {
         try {
             $sql = "INSERT INTO egresos_productos 
-                    (ruc, razon_social, nro_factura, fecha_compra, nombre_producto, tipo_producto, cant_productos, precio_producto, descripcion)
-                    VALUES (:ruc, :razon_social, :nro_factura, :fecha_compra, :nombre, 'Producto', :cantidad, :precio, :descripcion)";
+                    (ruc, razon_social, nro_factura, fecha_compra, nombre_producto, tipo_producto, cant_productos, precio_producto, descripcion, igv)
+                    VALUES (:ruc, :razon_social, :nro_factura, :fecha_compra, :nombre, 'Producto', :cantidad, :precio, :descripcion, :igv)";
             $stmt = $this->conn->prepare($sql);
             return $stmt->execute([
                 ':ruc' => $this->data['ruc'],
@@ -32,7 +32,8 @@ class RegistrarProductoModel
                 ':nombre' => $this->data['nombre'],
                 ':cantidad' => $this->data['cantidad'],
                 ':precio' => $this->data['precio'],
-                ':descripcion' => $this->data['descripcion']
+                ':descripcion' => $this->data['descripcion'],
+                ':igv' => $this->data['igv']
             ]);
         } catch (PDOException $e) {
             echo "Error al registrar producto: " . $e->getMessage();
