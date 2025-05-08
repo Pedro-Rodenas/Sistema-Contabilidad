@@ -12,17 +12,17 @@ class RegistrarServicioModel
         $this->conn = $db->connect();
     }
 
-    public function setData($ruc, $razon_social, $nro_factura, $fecha_servicio, $nombre, $periodo, $precio, $descripcion)
+    public function setData($ruc, $razon_social, $nro_factura, $fecha_servicio, $nombre, $periodo, $precio, $descripcion, $igv)
     {
-        $this->data = compact('ruc', 'razon_social', 'nro_factura', 'fecha_servicio', 'nombre', 'periodo', 'precio', 'descripcion');
+        $this->data = compact('ruc', 'razon_social', 'nro_factura', 'fecha_servicio', 'nombre', 'periodo', 'precio', 'descripcion', 'igv');
     }
 
     public function registrar()
     {
         try {
             $sql = "INSERT INTO egresos_servicios 
-                    (ruc, razon_social, nro_factura, fecha_servicio, nombre_servicio, tipo_servicio, periodo_consumo, precio_servicio, descripcion)
-                    VALUES (:ruc, :razon_social, :nro_factura, :fecha_servicio, :nombre, 'Servicio', :periodo, :precio, :descripcion)";
+                    (ruc, razon_social, nro_factura, fecha_servicio, nombre_servicio, tipo_servicio, periodo_consumo, precio_servicio, descripcion, igv)
+                    VALUES (:ruc, :razon_social, :nro_factura, :fecha_servicio, :nombre, 'Servicio', :periodo, :precio, :descripcion, :igv)";
             $stmt = $this->conn->prepare($sql);
             return $stmt->execute([
                 ':ruc' => $this->data['ruc'],
@@ -32,7 +32,8 @@ class RegistrarServicioModel
                 ':nombre' => $this->data['nombre'],
                 ':periodo' => $this->data['periodo'],
                 ':precio' => $this->data['precio'],
-                ':descripcion' => $this->data['descripcion']
+                ':descripcion' => $this->data['descripcion'],
+                ':igv' => $this->data['igv']
             ]);
         } catch (PDOException $e) {
             echo "Error al registrar servicio: " . $e->getMessage();

@@ -18,9 +18,10 @@ class RegistrarServicioController
         $periodo = $_POST['periodo_consumo'];
         $precio = $_POST['precio'];
         $descripcion = $_POST['descripcion'];
+        $igv = $_POST['igv'];
 
         $model = new RegistrarServicioModel();
-        $model->setData($ruc, $razon_social, $nro_factura, $fecha_servicio, $nombre, $periodo, $precio, $descripcion);
+        $model->setData($ruc, $razon_social, $nro_factura, $fecha_servicio, $nombre, $periodo, $precio, $descripcion, $igv);
 
         if ($model->registrar()) {
             header('Location: ../view/Registrar_Egreso.php');
