@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
-class RegistrarServicioModel
+class RegistrarConsumoModel
 {
     private $conn;
     private $data = [];
@@ -12,34 +12,39 @@ class RegistrarServicioModel
         $this->conn = $db->connect();
     }
 
-    public function setData($ruc, $razon_social, $nro_factura, $fecha_servicio, $nombre, $periodo, $precio, $descripcion, $igv, $tipo)
+    public function setData($ruc, $razon_social, $nro_factura, $fecha_consumo, $nombre, $cantidad, $precio, $descripcion, $igv, $tipo)
     {
-        $this->data = compact('ruc', 'razon_social', 'nro_factura', 'fecha_servicio', 'nombre', 'periodo', 'precio', 'descripcion', 'igv', 'tipo');
+        // Guardamos los datos en el array
+        $this->data = compact('ruc', 'razon_social', 'nro_factura', 'fecha_consumo', 'nombre', 'cantidad', 'precio', 'descripcion', 'igv', 'tipo');
     }
 
     public function registrar()
     {
         try {
+            // La consulta SQL para insertar los datos en la tabla egresos_consumo
             $sql = "INSERT INTO egresos_consumo 
-                    (`ruc`, `razon_social`, `nro_factura`, `fecha_consumo`, `nombre_consumo`, `tipo_consumo`, `cant_consumo`, `precio_consumo`, `descripcion`, `estado`, `created_at`, `updated_at`, `igv`, `tipo`)
-                    VALUES (:ruc, :razon_social, :nro_factura, :fecha_servicio, :nombre, 'Servicio', :periodo, :precio, :descripcion, 'activo', NOW(), NOW(), :igv, :tipo)";
+                    (`ruc`, `razon_social`, `nro_factura`, `fecha_consumo`, `nombre_consumo`, `tipo_consumo`, `cant_consumo`, `precio_consumo`, `descripcion`, `igv`, `tipo`)
+                    VALUES (:ruc, :razon_social, :nro_factura, :fecha_consumo, :nombre, 'Consumo', :cantidad, :precio, :descripcion, :igv, :tipo)";
 
+            // Preparamos la consulta SQL
             $stmt = $this->conn->prepare($sql);
 
+            // Ejecutamos la consulta pasando los valores
             return $stmt->execute([
                 ':ruc' => $this->data['ruc'],
                 ':razon_social' => $this->data['razon_social'],
                 ':nro_factura' => $this->data['nro_factura'],
-                ':fecha_servicio' => $this->data['fecha_servicio'],
+                ':fecha_consumo' => $this->data['fecha_consumo'],
                 ':nombre' => $this->data['nombre'],
-                ':periodo' => $this->data['periodo'],
+                ':cantidad' => $this->data['cantidad'],
                 ':precio' => $this->data['precio'],
                 ':descripcion' => $this->data['descripcion'],
                 ':igv' => $this->data['igv'],
                 ':tipo' => $this->data['tipo']
             ]);
         } catch (PDOException $e) {
-            echo "Error al registrar servicio: " . $e->getMessage();
+            // Si ocurre un error, mostramos el mensaje
+            echo "Error al registrar consumo: " . $e->getMessage();
             return false;
         }
     }

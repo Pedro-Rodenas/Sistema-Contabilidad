@@ -19,10 +19,18 @@ class EstadisticasModel
                 SELECT fecha_compra as fecha, precio_producto as total
                 FROM egresos_productos
                 WHERE estado = 'activo' AND YEAR(fecha_compra) = :ano
+
                 UNION ALL
+
                 SELECT fecha_servicio as fecha, precio_servicio as total
                 FROM egresos_servicios
                 WHERE estado = 'activo' AND YEAR(fecha_servicio) = :ano
+
+                UNION ALL
+                
+                SELECT fecha_consumo as fecha, precio_consumo as total
+                FROM egresos_consumo
+                WHERE estado = 'activo' AND YEAR(fecha_consumo) = :ano
             ) AS egresos
             GROUP BY mes
             ORDER BY total DESC
@@ -43,10 +51,19 @@ class EstadisticasModel
                 SELECT fecha_compra as fecha, precio_producto as total
                 FROM egresos_productos
                 WHERE estado = 'activo' AND YEAR(fecha_compra) = :ano
+
                 UNION ALL
+
                 SELECT fecha_servicio as fecha, precio_servicio as total
                 FROM egresos_servicios
                 WHERE estado = 'activo' AND YEAR(fecha_servicio) = :ano
+
+                UNION ALL
+
+                SELECT fecha_consumo as fecha, precio_consumo as total
+                FROM egresos_consumo
+                WHERE estado = 'activo' AND YEAR(fecha_consumo) = :ano
+
             ) AS egresos
             GROUP BY mes
             HAVING total > 0
@@ -60,22 +77,43 @@ class EstadisticasModel
         return $stmt->fetch(PDO::FETCH_ASSOC)['mes'] ?? null;
     }
 
-    public function getProductoMasCaro($ano)
+    public function getEgresoMasCaro($ano)
     {
         $sql = "
-            SELECT nombre_producto, MAX(precio_producto) as total
+        SELECT nombre, MAX(total) as total
+        FROM (
+            -- Productos
+            SELECT nombre_producto AS nombre, precio_producto AS total
             FROM egresos_productos
             WHERE estado = 'activo' AND YEAR(fecha_compra) = :ano
-            GROUP BY nombre_producto
-            ORDER BY total DESC
-            LIMIT 1
-        ";
+
+            UNION ALL
+
+            -- Consumos
+            SELECT nombre_consumo AS nombre, precio_consumo AS total
+            FROM egresos_consumo
+            WHERE estado = 'activo' AND YEAR(fecha_consumo) = :ano
+
+            UNION ALL
+
+            -- Servicios
+            SELECT nombre_servicio AS nombre, precio_servicio AS total
+            FROM egresos_servicios
+            WHERE estado = 'activo' AND YEAR(fecha_servicio) = :ano
+        ) AS egresos
+        GROUP BY nombre
+        ORDER BY total DESC
+        LIMIT 1
+    ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':ano', $ano, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['nombre_producto'] ?? null;
+
+        // Obtener el nombre del egreso más caro
+        return $stmt->fetch(PDO::FETCH_ASSOC)['nombre'] ?? null;
     }
+
 
     public function getEgresosPorMes($ano)
     {
@@ -85,10 +123,19 @@ class EstadisticasModel
             SELECT fecha_compra AS fecha, precio_producto AS total
             FROM egresos_productos
             WHERE estado = 'activo' AND YEAR(fecha_compra) = :ano
+
             UNION ALL
+
             SELECT fecha_servicio AS fecha, precio_servicio AS total
             FROM egresos_servicios
             WHERE estado = 'activo' AND YEAR(fecha_servicio) = :ano
+
+            UNION ALL
+
+            SELECT fecha_consumo AS fecha, precio_consumo AS total
+            FROM egresos_consumo
+            WHERE estado = 'activo' AND YEAR(fecha_consumo) = :ano
+
         ) AS egresos
         GROUP BY mes
         ORDER BY MONTH(fecha)
@@ -106,52 +153,24 @@ class EstadisticasModel
         SELECT 'Productos' AS tipo, SUM(precio_producto) AS total
         FROM egresos_productos
         WHERE estado = 'activo' AND YEAR(fecha_compra) = :ano
+
         UNION ALL
+
         SELECT 'Servicios' AS tipo, SUM(precio_servicio) AS total
         FROM egresos_servicios
         WHERE estado = 'activo' AND YEAR(fecha_servicio) = :ano
+
+        UNION ALL
+        
+        SELECT 'Consumo' AS tipo, SUM(precio_consumo) AS total
+        FROM egresos_consumo
+        WHERE estado = 'activo' AND YEAR(fecha_consumo) = :ano
+
     ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':ano', $ano, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function getComparacionAnual($ano)
-    {
-        $sql = "
-            SELECT SUM(total) as total, ano FROM (
-                SELECT precio_producto as total, YEAR(fecha_compra) as ano
-                FROM egresos_productos
-                WHERE estado = 'activo' AND YEAR(fecha_compra) IN (:ano_actual, :ano_anterior)
-                UNION ALL
-                SELECT precio_servicio as total, YEAR(fecha_servicio) as ano
-                FROM egresos_servicios
-                WHERE estado = 'activo' AND YEAR(fecha_servicio) IN (:ano_actual, :ano_anterior)
-            ) AS egresos
-            GROUP BY ano
-        ";
-
-        $stmt = $this->conn->prepare($sql);
-        $ano_anterior = $ano - 1;
-        $stmt->bindParam(':ano_actual', $ano, PDO::PARAM_INT);
-        $stmt->bindParam(':ano_anterior', $ano_anterior, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $totales = [
-            'actual' => 0,
-            'anterior' => 0
-        ];
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            if ((int)$row['ano'] === (int)$ano) {
-                $totales['actual'] = (float)$row['total'];
-            } else {
-                $totales['anterior'] = (float)$row['total'];
-            }
-        }
-
-        return $totales;
     }
 }

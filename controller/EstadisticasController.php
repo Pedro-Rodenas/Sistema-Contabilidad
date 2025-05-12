@@ -9,10 +9,9 @@ $model = new EstadisticasModel();
 
 $mes_mas_gasto = $model->getMesMasGasto($ano);
 $mes_menos_gasto = $model->getMesMenosGasto($ano);
-$producto_mas_caro = $model->getProductoMasCaro($ano);
+$producto_mas_caro = $model->getEgresoMasCaro($ano);
 $egresos_por_mes = $model->getEgresosPorMes($ano);
 $grafico_pastel = $model->getDistribucionEgresosPorTipo($ano);
-$comparacion_anual = $model->getComparacionAnual($ano);
 
 /* Devolvemos los daos en json */
 echo json_encode([
@@ -21,5 +20,4 @@ echo json_encode([
     'producto_mas_caro' => $producto_mas_caro,
     'grafico_lineas' => $egresos_por_mes,
     'grafico_pastel'=> $grafico_pastel,
-    'comparacion_anual' => $comparacion_anual
 ]);

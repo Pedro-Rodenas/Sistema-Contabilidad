@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../config/database.php";
-require_once __DIR__ . '/../fpdf/fpdf.php'; // Agregar FPDF
+require_once __DIR__ . '/../fpdf/fpdf.php';
 
 class TablaEgresosModel
 {
@@ -13,6 +13,7 @@ class TablaEgresosModel
     }
 
     public function obtenerEgresosPorMes($anio, $mes)
+
     {
         $egresos = [];
 
@@ -63,8 +64,10 @@ class TablaEgresosModel
                 tipo_servicio AS tipo_origen,
                 estado
             FROM egresos_servicios
-            WHERE YEAR(fecha_servicio) = :anio AND MONTH(fecha_servicio) = :mes
+            WHERE YEAR(fecha_servicio) = :anio 
+            AND (:mes IS NULL OR MONTH(fecha_servicio) = :mes)
         ";
+
 
         $stmtServicios = $this->conn->prepare($queryServicios);
         $stmtServicios->bindParam(':anio', $anio, PDO::PARAM_INT);
@@ -91,7 +94,8 @@ class TablaEgresosModel
                 tipo_consumo AS tipo_origen,
                 estado
             FROM egresos_consumo
-            WHERE YEAR(fecha_consumo) = :anio AND MONTH(fecha_consumo) = :mes
+            WHERE YEAR(fecha_consumo) = :anio 
+            AND (:mes IS NULL OR MONTH(fecha_consumo) = :mes)
         ";
 
         $stmtConsumptions = $this->conn->prepare($queryConsumptions);

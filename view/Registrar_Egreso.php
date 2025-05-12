@@ -174,8 +174,8 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                 </div>
                 <div class="form-group doble">
                     <div class="form-group">
-                        <label for="Tipo">Tipo De Recibo</label>
-                        <select class="select-serie" name="tipo" id="tipo">
+                        <label for="tipo">Tipo De Recibo:</label>
+                        <select class="select-serie" name="tipo" id="tipo" required>
                             <option value="Factura">Factura</option>
                             <option value="Boleta">Boleta</option>
                         </select>
@@ -185,35 +185,35 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                         <input type="text" name="nro_factura" required>
                     </div>
                     <div class="form-group">
-                        <label for="fecha_servicio">Fecha del Consumo:</label>
-                        <input type="date" name="fecha_servicio" required>
+                        <label for="fecha_consumo">Fecha del Consumo:</label>
+                        <input type="date" name="fecha_consumo" required> <!-- Cambié "fecha_servicio" por "fecha_consumo" -->
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="name">Nombre del Consumo:</label>
-                    <input type="text" name="name" required>
+                    <label for="nombre_consumo">Nombre del Consumo:</label> <!-- Cambié "name" por "nombre_consumo" -->
+                    <input type="text" name="nombre_consumo" required> <!-- Cambié "name" por "nombre_consumo" -->
                 </div>
                 <div class="form-group doble">
                     <div class="form-group">
-                        <label for="periodo_consumo">Cantidad de Consumo:</label>
-                        <input type="text" name="periodo_consumo" required>
+                        <label for="cant_consumo">Cantidad de Consumo:</label> <!-- Cambié "periodo_consumo" por "cant_consumo" -->
+                        <input type="text" name="cant_consumo" required> <!-- Cambié "periodo_consumo" por "cant_consumo" -->
                     </div>
                     <div class="form-group">
-                        <label for="precio">Valor de Consumo:</label>
-                        <input type="number" step="0.01" name="precio" required>
+                        <label for="precio_consumo">Valor de Consumo:</label> <!-- Cambié "precio" por "precio_consumo" -->
+                        <input type="number" step="0.01" name="precio_consumo" required> <!-- Cambié "precio" por "precio_consumo" -->
                     </div>
                     <div>
-                        <label for="precio">IGV (18%):</label>
+                        <label for="igv">IGV (18%):</label>
                         <input type="number" step="0.01" name="igv" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Descripción:</label>
+                    <label for="descripcion">Descripción:</label>
                     <textarea name="descripcion" id="descripcion"></textarea>
                 </div>
 
-                <button type="submit">Registrar Servicio</button>
+                <button type="submit">Registrar Consumo</button>
             </form>
 
         </section>
