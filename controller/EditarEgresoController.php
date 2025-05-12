@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resultado = $model->editarProducto($id, $nombre, $cantidad, $precio, $igv);
     } elseif ($tipo === 'Servicio') {
         $resultado = $model->editarServicio($id, $nombre, $cantidad, $precio, $igv);
+    } elseif ($tipo === 'Consumo') {
+        $resultado = $model->editarConsumo($id, $nombre, $cantidad, $precio, $igv);
     } else {
         http_response_code(400);
         echo "Tipo de egreso no válido.";

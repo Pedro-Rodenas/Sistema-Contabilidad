@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $resultado = $modelo->eliminarProducto($id);
         } else if ($tipo === 'Servicio') {
             $resultado = $modelo->eliminarServicio($id);
+        } else if ($tipo === 'Consumo') {
+            $resultado = $modelo->eliminarConsumo($id);
         } else {
             echo "Tipo de egreso no válido.";
             exit;
