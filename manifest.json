@@ -1,0 +1,23 @@
+{
+  "name": "Sistema de Egresos",
+  "short_name": "Egresos",
+  "description": "Aplicación para el manejo y reporte de egresos, productos, servicios y consumos.",
+  "start_url": "/index.php",  
+  "display": "standalone",  
+  "background_color": "#ffffff",  
+  "theme_color": "#4CAF50",  
+  "icons": [
+    {
+      "src": "assets/img/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "portrait",
+  "scope": "/"
+}
