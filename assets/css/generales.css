@@ -30,12 +30,12 @@ header {
     left: 0;
     justify-content: space-between;
     display: flex;
-    flex-direction: column; 
-    justify-content: space-between; 
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 header>img {
-    width: 70%;
+    width: 40%;
     margin-block-end: 2.5rem;
 }
 
@@ -48,7 +48,7 @@ header a {
     padding: 1rem 0;
 }
 
-.derecho_reservado{
+.derecho_reservado {
     color: var(--color-derecho-reservado);
     margin-top: auto;
 }
@@ -59,6 +59,30 @@ main {
     margin-left: 20%;
 }
 
-p{
+p {
     padding-inline: 1rem;
+}
+
+a[href="../controller/logout.php"] {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+a[href="../controller/logout.php"]:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+a[href="../controller/logout.php"]:active {
+    background-color: #bd2130;
+    transform: translateY(0);
 }

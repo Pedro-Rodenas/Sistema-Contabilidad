@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usuario', 'admin'])) {
+    header('Location: ../index.php');
+    exit;
+}
+?>
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,8 +26,9 @@
         <a href="Egresos.php">Egresos</a>
         <a href="Estadisticas.php">Estadísticas</a>
         <a class="a-reporte" href="Reporte.php">Reporte</a>
-        <a href="loginAdmin.php">Admin</a>
+        <a href="usuarios.php">Admin</a>
         <p class="derecho_reservado">© 2025 Aprode Perú - Todos los derechos reservados</p>
+        <a href="../controller/logout.php">Cerrar sesión</a>
     </header>
     <main>
         <form id="form-reporte" onsubmit="return false;">

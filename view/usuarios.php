@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] !== 'admin') {
-    header('Location: loginAdmin.php');
+    header('Location: Registrar_Egreso.php');
     exit;
 }
 ?>
@@ -22,10 +22,13 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] !== 'admin') {
 <body>
     <header>
         <img src="../assets/img/logo.png" alt="">
-        <a href="usuarios.php">Admin</a>
+        <a href="Registrar_Egreso.php">Registrar Egreso</a>
+        <a href="Egresos.php">Egresos</a>
+        <a href="Estadisticas.php">Estadísticas</a>
+        <a href="Reporte.php">Reporte</a>
+        <a class="usuarios-xd" href="usuarios.php">Admin</a>
         <p class="derecho_reservado">© 2025 Aprode Perú - Todos los derechos reservados</p>
         <a href="../controller/logout.php">Cerrar sesión</a>
-        
     </header>
 
     <main>

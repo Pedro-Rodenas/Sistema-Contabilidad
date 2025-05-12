@@ -2,5 +2,5 @@
 session_start();
 session_unset();
 session_destroy();
-header('Location: ../view/Registrar_Egreso.php');
+header('Location: ../index.php');
 exit;

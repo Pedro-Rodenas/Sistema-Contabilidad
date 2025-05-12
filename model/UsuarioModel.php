@@ -48,6 +48,6 @@ class UsuarioModel
     {
         $stmt = $this->conn->prepare("SELECT id, user, pass, rol FROM usuarios WHERE user = :user");
         $stmt->execute([':user' => $user]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);  // Retorna un array con los datos del usuario
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
     }
 }

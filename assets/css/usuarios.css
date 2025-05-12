@@ -106,3 +106,8 @@ button[onclick*="eliminar"] {
     cursor: pointer;
     user-select: none;
 }
+
+.usuarios-xd{
+    width: 100%;
+    background-color: #569b45;
+}
