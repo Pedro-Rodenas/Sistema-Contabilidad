@@ -44,25 +44,14 @@
             </div>
         </div>
 
-        <h2 class="titulo-grafico">Egresos Mensuales</h2>
         <section class="c-graficos-1">
             <div class="grafico-lineas">
                 <canvas id="graficoLineas" height="250"></canvas>
             </div>
-            <section class="sub-graficos">
-                <div class="grafico-pastel">
-                    <h2>Productos y Servicios</h2>
-                    <canvas id="graficoPastel"></canvas>
-                </div>
-                <div class="grafico-pastel">
-                    <h2>Comparación Año Pasado</h2>
-                    <canvas id="gráficoDonut"></canvas>
-                </div>
-                <div class="grafico-pastel">
-                    <h2>Gráfico que se cambiará</h2>
-                    <canvas id="grafico3"></canvas>
-                </div>
-            </section>
+            <div class="grafico-pastel">
+                <h2>Productos y Servicios</h2>
+                <canvas id="gráficoDonut"></canvas>
+            </div>
         </section>
 
     </main>

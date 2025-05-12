@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let grafico;
-let graficoPastel;
 let donutChart;
 
 function cargarEstadisticas() {
@@ -17,7 +16,6 @@ function cargarEstadisticas() {
             document.getElementById('mes-mas-gasto').textContent = data.mes_mas_gasto || '---';
             document.getElementById('producto-mas-caro').textContent = data.producto_mas_caro || '---';
             document.getElementById('mes-menos-gasto').textContent = data.mes_menos_gasto || '---';
-
 
             const meses = data.grafico_lineas.map(item => item.mes);
             const totales = data.grafico_lineas.map(item => item.total);
@@ -32,9 +30,9 @@ function cargarEstadisticas() {
                     datasets: [{
                         label: 'Total de Egresos por Mes',
                         data: totales,
-                        borderColor: '#00ffcc',
-                        backgroundColor: 'rgba(0, 255, 204, 0.1)',
-                        pointBackgroundColor: '#00ffcc',
+                        borderColor: '#00b0ff',
+                        backgroundColor: 'rgba(0, 176, 255, 0.1)',
+                        pointBackgroundColor: '#00b0ff',
                         pointBorderColor: '#2c3e50',
                         pointHoverRadius: 6,
                         fill: true,
@@ -80,22 +78,44 @@ function cargarEstadisticas() {
                 }
             });
 
+            // Datos para el gráfico de dona
+            const donutLabels = data.grafico_pastel.map(item => item.tipo);
+            const donutDatos = data.grafico_pastel.map(item => parseFloat(item.total));
 
-            const pastelLabels = data.grafico_pastel.map(item => item.tipo);
-            const pastelDatos = data.grafico_pastel.map(item => parseFloat(item.total));
+            // Crear degradados para el gráfico de dona
+            const ctxDonut = document.getElementById('gráficoDonut').getContext('2d');
+            if (donutChart) donutChart.destroy();
 
-            const ctxPastel = document.getElementById('graficoPastel').getContext('2d');
-            if (graficoPastel) graficoPastel.destroy();
+            // Degradados más serios y tecnológicos
+            const gradient1 = ctxDonut.createLinearGradient(0, 0, 0, 200);
+            gradient1.addColorStop(0, '#00b0ff');  // Verde agua
+            gradient1.addColorStop(1, '#0052cc');  // Azul oscuro
 
-            graficoPastel = new Chart(ctxPastel, {
-                type: 'pie',
+            const gradient2 = ctxDonut.createLinearGradient(0, 0, 0, 200);
+            gradient2.addColorStop(0, '#7f8c8d');  // Gris oscuro
+            gradient2.addColorStop(1, '#95a5a6');  // Gris más claro
+
+            const gradient3 = ctxDonut.createLinearGradient(0, 0, 0, 200);
+            gradient3.addColorStop(0, '#16a085');  // Verde fuerte
+            gradient3.addColorStop(1, '#1abc9c');  // Verde menta
+
+            const gradient4 = ctxDonut.createLinearGradient(0, 0, 0, 200);
+            gradient4.addColorStop(0, '#34495e');  // Azul oscuro
+            gradient4.addColorStop(1, '#2c3e50');  // Azul grisáceo
+
+            const gradient5 = ctxDonut.createLinearGradient(0, 0, 0, 200);
+            gradient5.addColorStop(0, '#2980b9');  // Azul brillante
+            gradient5.addColorStop(1, '#3498db');  // Azul más claro
+
+            donutChart = new Chart(ctxDonut, {
+                type: 'doughnut',
                 data: {
-                    labels: pastelLabels,
+                    labels: donutLabels,
                     datasets: [{
-                        data: pastelDatos,
-                        backgroundColor: ['#00ffcc', '#0077b6', '#90e0ef', '#caf0f8'],
-                        borderColor: '#1e1e1e',
-                        borderWidth: 1
+                        data: donutDatos,
+                        backgroundColor: [gradient1, gradient2, gradient3, gradient4, gradient5],
+                        borderWidth: 0,
+                        cutout: '70%' // Crea el estilo de dona
                     }]
                 },
                 options: {
@@ -105,7 +125,7 @@ function cargarEstadisticas() {
                             callbacks: {
                                 label: function (context) {
                                     const label = context.label || '';
-                                    const value = context.parsed || 0;
+                                    const value = context.raw || 0;
                                     return `${label}: S/. ${value.toFixed(2)}`;
                                 }
                             }
@@ -114,55 +134,16 @@ function cargarEstadisticas() {
                             labels: {
                                 color: '#000000'
                             }
-                        }
-                    }
-                }
-            });
-
-
-            const { actual, anterior } = data.comparacion_anual;
-
-            const variacion = anterior > 0 ? ((actual - anterior) / anterior) * 100 : 0;
-            const aumento = variacion >= 0;
-
-            const ctxDonut = document.getElementById('gráficoDonut').getContext('2d');
-            if (donutChart) donutChart.destroy();
-
-            donutChart = new Chart(ctxDonut, {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: [Math.abs(variacion), 100 - Math.abs(variacion)],
-                        backgroundColor: [
-                            aumento ? '#00ffcc' : '#ff4d4d',
-                            '#d8d8d8'
-                        ],
-                        borderWidth: 0,
-                        cutout: '70%'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function () {
-                                    return `${aumento ? '+' : '-'}${Math.abs(variacion).toFixed(1)}% respecto al ${parseInt(anoSeleccionado) - 1}`;
-                                }
-                            }
-                        },
-                        legend: {
-                            display: false
                         },
                         title: {
                             display: true,
-                            text: `${aumento ? '+' : '-'}${Math.abs(variacion).toFixed(1)}% ${aumento ? 'más' : 'menos'} que en ${parseInt(anoSeleccionado) - 1}`,
+                            text: 'Distribución de Egresos',
                             position: 'bottom',
                             font: {
                                 size: 14,
                                 weight: 'bold'
                             },
-                            color: aumento ? '#00ffcc' : '#ff4d4d'
+                            color: '#000000'
                         }
                     }
                 }

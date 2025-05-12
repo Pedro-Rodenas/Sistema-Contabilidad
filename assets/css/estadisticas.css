@@ -95,6 +95,7 @@ main>select {
 }
 
 .grafico-lineas {
+    width: 70%;
     background-color: #ffffff;
     padding: 1.5rem;
     border-radius: 12px;
@@ -114,16 +115,13 @@ canvas#graficoLineas {
     padding: 1rem;
 }
 
-.sub-graficos {
-    margin-block: 1rem;
-    width: 100%;
+.c-graficos-1{
+    display: flex;
     gap: 1rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
 }
 
 .grafico-pastel {
-    width: 100%;
+    width: 30%;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.336);
