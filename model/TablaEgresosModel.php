@@ -70,6 +70,34 @@ class TablaEgresosModel
 
         $egresos = array_merge($egresos, $stmtServicios->fetchAll(PDO::FETCH_ASSOC));
 
+        // Consumo
+        $queryConsumo = "
+            SELECT 
+                id_consumo AS id,
+                fecha_consumo AS fecha,
+                'Consumo' AS tipo_egreso,
+                nombre_consumo AS nombre,
+                cant_consumo AS cantidad,
+                precio_consumo AS precio,
+                igv,
+                tipo AS tipo_factura,
+                descripcion,
+                ruc,
+                razon_social,
+                nro_factura,
+                tipo_consumo AS tipo_origen,
+                estado
+            FROM egresos_consumo
+            WHERE YEAR(fecha_consumo) = :anio AND MONTH(fecha_consumo) = :mes
+        ";
+
+        $stmtConsumo = $this->conn->prepare($queryConsumo);
+        $stmtConsumo->bindParam(':anio', $anio, PDO::PARAM_INT);
+        $stmtConsumo->bindParam(':mes', $mes, PDO::PARAM_INT);
+        $stmtConsumo->execute();
+
+        $egresos = array_merge($egresos, $stmtConsumo->fetchAll(PDO::FETCH_ASSOC));
+
         return $egresos;
     }
 
@@ -116,6 +144,27 @@ class TablaEgresosModel
         ]);
     }
 
+    public function editarConsumo($id, $nombre, $periodo, $precio, $igv)
+    {
+        $query = "
+        UPDATE egresos_consumo 
+        SET nombre_consumo = :nombre, 
+            cant_consumo = :periodo, 
+            precio_consumo = :precio,
+            igv = :igv
+        WHERE id_consumo = :id
+    ";
+
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([
+            ':nombre' => $nombre,
+            ':periodo' => $periodo,
+            ':precio' => $precio,
+            ':igv' => $igv,
+            ':id' => $id
+        ]);
+    }
+
     /* Método para eliminar producto */
     public function eliminarProducto($id)
     {
@@ -134,6 +183,18 @@ class TablaEgresosModel
         $query = "
             DELETE FROM egresos_servicios 
             WHERE id_servicio = :id
+        ";
+
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([':id' => $id]);
+    }
+
+    /* Método para eliminar consumo */
+    public function eliminarConsumo($id)
+    {
+        $query = "
+            DELETE FROM egresos_consumo 
+            WHERE id_consumo = :id
         ";
 
         $stmt = $this->conn->prepare($query);
