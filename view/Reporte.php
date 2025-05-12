@@ -19,8 +19,39 @@
         <p class="derecho_reservado">© 2025 Aprode Perú - Todos los derechos reservados</p>
     </header>
     <main>
+        <form id="form-reporte" onsubmit="return false;">
+            <fieldset>
+                <label for="mes">Mes:</label>
+                <select id="mes" name="mes">
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
 
+                <label for="ano">Año:</label>
+                <select id="ano" name="ano">
+                    <!-- Puedes llenarlo dinámicamente con años disponibles -->
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <!-- Agrega más años según sea necesario -->
+                </select>
+                <button id="sacar-reporte-mes">Sacar reporte por mes</button>
+                <button id="sacar-reporte-ano">Sacar reporte del año</button>
+            </fieldset>
+        </form>
     </main>
+
+    <script src="../assets//js/reporte.js"></script>
 </body>
 
 </html>

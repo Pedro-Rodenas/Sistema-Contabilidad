@@ -2,3 +2,52 @@
     width: 100%;
     background-color: #569b45;
 }
+
+/* Main */
+main {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 140px);
+}
+
+/* Formulario */
+#form-reporte fieldset {
+    border: 2px solid #003366;
+    padding: 40px;
+    border-radius: 10px;
+    background: #ffffff;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#form-reporte label {
+    font-weight: bold;
+    color: #003366;
+}
+
+#form-reporte select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+}
+
+#form-reporte button {
+    padding: 10px 20px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#form-reporte button:hover {
+    background-color: #0055aa;
+}
