@@ -1,0 +1,33 @@
+<?php
+require_once __DIR__ . '/../model/RegistrarConsumoModel.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $controller = new RegistrarServicioController();
+    $controller->registrar();
+}
+
+class RegistrarServicioController
+{
+    public function registrar()
+    {
+        $ruc = $_POST['ruc'];
+        $razon_social = $_POST['razon_social'];
+        $nro_factura = $_POST['nro_factura'];
+        $fecha_servicio = $_POST['fecha_servicio'];
+        $nombre = $_POST['name'];
+        $periodo = $_POST['periodo_consumo'];
+        $precio = $_POST['precio'];
+        $descripcion = $_POST['descripcion'];
+        $igv = $_POST['igv'];
+        $tipo = $_POST['tipo'];
+
+        $model = new RegistrarServicioModel();
+        $model->setData($ruc, $razon_social, $nro_factura, $fecha_servicio, $nombre, $periodo, $precio, $descripcion, $igv, $tipo);
+
+        if ($model->registrar()) {
+            header('Location: ../view/Registrar_Egreso.php');
+        } else {
+            echo "Error al registrar servicio.";
+        }
+    }
+}

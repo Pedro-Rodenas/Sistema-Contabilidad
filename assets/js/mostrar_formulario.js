@@ -6,10 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
     /* Obtenemos los formularios del DOM */
     let formProducto = document.getElementById("form_producto");
     let formServicio = document.getElementById("form_servicio");
+    let formConsumo = document.getElementById("form_consumo");
 
     /* El formulario de producto será visible por defecto */
     formProducto.style.display = "block";
     formServicio.style.display = "none";
+    formConsumo.style.display = "none";
 
     /* Seleccionamos la opción producto por defecto */
     tipoEgreso.value = "producto";
@@ -20,16 +22,19 @@ document.addEventListener("DOMContentLoaded", function () {
         if (tipoEgreso.value === "producto") {
             formProducto.style.display = "block";
             formServicio.style.display = "none";
+            formConsumo.style.display = "none";
         }
 
         else if (tipoEgreso.value === "servicio") {
             formProducto.style.display = "none";
+            formConsumo.style.display = "none";
             formServicio.style.display = "block";
         }
 
-        else {
+        else if (tipoEgreso.value === "consumo"){
             formProducto.style.display = "none";
             formServicio.style.display = "none";
+            formConsumo.style.display = "block";
         }
     });
 });
