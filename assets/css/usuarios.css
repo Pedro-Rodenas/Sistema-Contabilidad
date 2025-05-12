@@ -1,0 +1,108 @@
+main {
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: flex-end;
+}
+
+form input,
+form select,
+form button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+form input:focus,
+form select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background-color: #2980b9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #34495e;
+    color: white;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+}
+
+button {
+    padding: 6px 10px;
+    font-size: 14px;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+button[onclick*="editar"] {
+    background-color: #f39c12;
+    color: #fff;
+}
+
+button[onclick*="eliminar"] {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.input-password {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-password input {
+    flex: 1;
+    padding-right: 30px;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    user-select: none;
+}

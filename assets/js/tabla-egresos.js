@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(res => res.text())
                     .then(msg => {
                         if (msg.includes('correctamente')) {
-                            location.reload();
+                            cargarEgresos();
                         } else {
                             mostrarMensaje('No se pudo eliminar: ' + msg, 'error');
                         }

@@ -16,6 +16,7 @@
         <a class="a-egresos-tabla" href="Egresos.php">Egresos</a>
         <a href="Estadisticas.php">Estadísticas</a>
         <a href="Reporte.php">Reporte</a>
+        <a href="loginAdmin.php">Admin</a>
         <p class="derecho_reservado">© 2025 Aprode Perú - Todos los derechos reservados</p>
     </header>
     <main>
