@@ -15,6 +15,9 @@
     --white: #ffffff;
 }
 
+main{
+    margin-block: 2rem;
+}
 
 .a-estadisticas {
     width: 100%;
