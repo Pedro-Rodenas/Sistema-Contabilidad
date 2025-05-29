@@ -14,7 +14,7 @@ class TablaEgresosModel
     {
         $egresos = [];
 
-        // Productos
+        /* Productos */
         $queryProductos = "
             SELECT 
                 id_producto AS id,
@@ -29,6 +29,7 @@ class TablaEgresosModel
                 ruc,
                 razon_social,
                 nro_factura,
+                descuento,
                 tipo_producto AS tipo_origen,
                 estado
             FROM egresos_productos
@@ -42,7 +43,7 @@ class TablaEgresosModel
 
         $egresos = array_merge($egresos, $stmtProductos->fetchAll(PDO::FETCH_ASSOC));
 
-        // Servicios
+        /* Servicios */
         $queryServicios = "
             SELECT 
                 id_servicio AS id,
@@ -70,7 +71,7 @@ class TablaEgresosModel
 
         $egresos = array_merge($egresos, $stmtServicios->fetchAll(PDO::FETCH_ASSOC));
 
-        // Consumo
+        /* Consumo */
         $queryConsumo = "
             SELECT 
                 id_consumo AS id,

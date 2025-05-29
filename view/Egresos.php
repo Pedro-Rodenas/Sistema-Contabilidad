@@ -67,12 +67,13 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                         <th>Cantidad</th>
                         <th>Base imponible</th>
                         <th>Igv (18%)</th>
+                        <th>Descuento</th>
                         <th>Total</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="tabla-body">
-                    <!-- Aquí se llenan los datos -->
+                    <!-- Aquí se trearean los datos -->
                 </tbody>
             </table>
             <div class="totales-egresos">
