@@ -94,6 +94,10 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                         <label for="precio">IGV (18%):</label>
                         <input type="number" step="0.01" name="igv" required>
                     </div>
+                    <div>
+                        <label for="descuento">Descuento:</label>
+                        <input type="number" step="0.01" name="descuento" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -186,21 +190,21 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     </div>
                     <div class="form-group">
                         <label for="fecha_consumo">Fecha del Consumo:</label>
-                        <input type="date" name="fecha_consumo" required> <!-- Cambié "fecha_servicio" por "fecha_consumo" -->
+                        <input type="date" name="fecha_consumo" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="nombre_consumo">Nombre del Consumo:</label> <!-- Cambié "name" por "nombre_consumo" -->
-                    <input type="text" name="nombre_consumo" required> <!-- Cambié "name" por "nombre_consumo" -->
+                    <label for="nombre_consumo">Nombre del Consumo:</label>
+                    <input type="text" name="nombre_consumo" required>
                 </div>
                 <div class="form-group doble">
                     <div class="form-group">
-                        <label for="cant_consumo">Cantidad de Consumo:</label> <!-- Cambié "periodo_consumo" por "cant_consumo" -->
-                        <input type="text" name="cant_consumo" required> <!-- Cambié "periodo_consumo" por "cant_consumo" -->
+                        <label for="cant_consumo">Cantidad de Consumo:</label>
+                        <input type="text" name="cant_consumo" required>
                     </div>
                     <div class="form-group">
-                        <label for="precio_consumo">Valor de Consumo:</label> <!-- Cambié "precio" por "precio_consumo" -->
-                        <input type="number" step="0.01" name="precio_consumo" required> <!-- Cambié "precio" por "precio_consumo" -->
+                        <label for="precio_consumo">Valor de Consumo:</label>
+                        <input type="number" step="0.01" name="precio_consumo" required>
                     </div>
                     <div>
                         <label for="igv">IGV (18%):</label>
