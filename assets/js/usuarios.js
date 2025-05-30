@@ -33,10 +33,23 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then(res => res.text())
             .then(msg => {
-                alert(msg === 'ok' ? 'Guardado correctamente' : 'Error al guardar');
-                form.reset();
-                form.querySelector('[name=accion]').value = 'agregar';
-                cargarUsuarios();
+                if (msg === 'ok') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Guardado correctamente',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    form.reset();
+                    form.querySelector('[name=accion]').value = 'agregar';
+                    cargarUsuarios();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al guardar',
+                        text: msg
+                    });
+                }
             });
     });
 
@@ -49,27 +62,50 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.eliminar = (id) => {
-        if (!confirm('¿Eliminar este usuario?')) return;
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Esta acción no se puede deshacer.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const data = new FormData();
+                data.append('accion', 'eliminar');
+                data.append('id', id);
 
-        const data = new FormData();
-        data.append('accion', 'eliminar');
-        data.append('id', id);
-
-        fetch('../controller/UsuarioController.php', {
-            method: 'POST',
-            body: data
-        })
-            .then(res => res.text())
-            .then(msg => {
-                alert(msg === 'ok' ? 'Eliminado' : 'Error al eliminar');
-                window.location.reload();
-            });
+                fetch('../controller/UsuarioController.php', {
+                    method: 'POST',
+                    body: data
+                })
+                    .then(res => res.text())
+                    .then(msg => {
+                        if (msg === 'ok') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Eliminado correctamente',
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+                            cargarUsuarios();
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error al eliminar',
+                                text: msg
+                            });
+                        }
+                    });
+            }
+        });
     };
 
     cargarUsuarios();
 });
 
-// Toggle de visibilidad de la contraseña
 function togglePassword() {
     const input = document.getElementById('input-pass');
     input.type = input.type === 'password' ? 'text' : 'password';
