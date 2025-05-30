@@ -109,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     };
-
     const EditarOpcionesMeses = () => {
         const selectedYear = parseInt(añoSelect.value);
         const currentDate = new Date();
@@ -132,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = 'block';
     };
 
+    /* Modal para cerrar el editar egreso */
     window.cerrarModal = () => modal.style.display = 'none';
 
     if (formEditar) {
