@@ -1,40 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const tipoEgreso = document.getElementById("tipo_egreso");
 
-    /* Obtenemis el elemento select */
-    let tipoEgreso = document.getElementById("tipo_egreso");
+    const formProducto = document.getElementById("form_producto");
+    const formServicio = document.getElementById("form_servicio");
+    const formConsumo = document.getElementById("form_consumo");
 
-    /* Obtenemos los formularios del DOM */
-    let formProducto = document.getElementById("form_producto");
-    let formServicio = document.getElementById("form_servicio");
-    let formConsumo = document.getElementById("form_consumo");
+    const hideAllForms = () => {
+        [formProducto, formServicio, formConsumo].forEach(form => {
+            form.style.display = "none";
+            form.classList.remove("active");
+        });
+    };
 
-    /* El formulario de producto será visible por defecto */
-    formProducto.style.display = "block";
-    formServicio.style.display = "none";
-    formConsumo.style.display = "none";
+    const showForm = (form) => {
+        form.style.display = "block";
+        void form.offsetWidth;
+        form.classList.add("active");
+    };
 
-    /* Seleccionamos la opción producto por defecto */
     tipoEgreso.value = "producto";
+    hideAllForms();
+    showForm(formProducto);
 
     tipoEgreso.addEventListener("change", function () {
+        hideAllForms();
 
-        /* Condicional que si seleccion producto */
         if (tipoEgreso.value === "producto") {
-            formProducto.style.display = "block";
-            formServicio.style.display = "none";
-            formConsumo.style.display = "none";
-        }
-
-        else if (tipoEgreso.value === "servicio") {
-            formProducto.style.display = "none";
-            formConsumo.style.display = "none";
-            formServicio.style.display = "block";
-        }
-
-        else if (tipoEgreso.value === "consumo"){
-            formProducto.style.display = "none";
-            formServicio.style.display = "none";
-            formConsumo.style.display = "block";
+            showForm(formProducto);
+        } else if (tipoEgreso.value === "servicio") {
+            showForm(formServicio);
+        } else if (tipoEgreso.value === "consumo") {
+            showForm(formConsumo);
         }
     });
 });
