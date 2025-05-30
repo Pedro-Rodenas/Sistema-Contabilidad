@@ -41,15 +41,17 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
     <main>
         <section class="contenedor-tabla">
             <h1>Egresos de la ONG - Por Mes</h1>
-            <div class="c-filtros">
-                <label for="year">Seleccionar Año</label>
+
+            <fieldset class="c-filtros">
+                <legend>Filtros</legend>
+                <label for="year">Año:</label>
                 <select name="year" id="year">
                     <option value="2025">2025</option>
                     <option value="2024">2024</option>
                     <option value="2023">2023</option>
                 </select>
 
-                <label for="month">Seleccionar Mes:</label>
+                <label for="month">Mes:</label>
                 <select id="month" name="month">
                     <option value="1">Enero</option>
                     <option value="2">Febrero</option>
@@ -64,60 +66,65 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     <option value="11">Noviembre</option>
                     <option value="12">Diciembre</option>
                 </select>
+            </fieldset>
+
+            <div class="tabla-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Comprobante</th>
+                            <th>Tipo de Egreso</th>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Base imponible</th>
+                            <th>IGV (18%)</th>
+                            <th>Descuento</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body">
+                        <!-- Datos dinámicos -->
+                    </tbody>
+                </table>
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Comprobante</th>
-                        <th>Tipo de Egreso</th>
-                        <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Base imponible</th>
-                        <th>Igv (18%)</th>
-                        <th>Descuento</th>
-                        <th>Total</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tabla-body">
-                    <!-- Aquí se trearean los datos -->
-                </tbody>
-            </table>
             <div class="totales-egresos">
                 <p><strong>Total sin IGV:</strong> <span id="total-precio">S/. 0.00</span></p>
                 <p><strong>Total IGV:</strong> <span id="total-igv">S/. 0.00</span></p>
                 <p><strong>Total con IGV:</strong> <span id="total-con-igv">S/. 0.00</span></p>
             </div>
-
         </section>
 
+        <!-- Modal -->
         <section id="modal" class="modal" style="display: none;">
             <form class="modal-content" id="form-editar">
+                <h2>Editar Egreso</h2>
                 <input type="hidden" id="editar-id" name="id">
                 <input type="hidden" id="editar-origen" name="tipo">
 
-                <label>Nombre:</label>
+                <label for="editar-nombre">Nombre:</label>
                 <input type="text" id="editar-nombre" name="nombre">
 
-                <label>Cantidad / Periodo:</label>
+                <label for="editar-cantidad">Cantidad / Periodo:</label>
                 <input type="text" id="editar-cantidad" name="cantidad">
 
-                <label>Precio:</label>
+                <label for="editar-precio">Base Imponible:</label>
                 <input type="text" id="editar-precio" name="precio">
 
-                <label>Igv:</label>
+                <label for="editar-igv">IGV:</label>
                 <input type="text" id="editar-igv" name="igv">
 
-                <button type="submit">Guardar</button>
-                <button type="button" onclick="cerrarModal()">Cancelar</button>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                    <button type="button" onclick="cerrarModal()" class="btn-cancelar">Cancelar</button>
+                </div>
             </form>
         </section>
-
-
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/tabla-egresos.js"></script>
 
 </body>

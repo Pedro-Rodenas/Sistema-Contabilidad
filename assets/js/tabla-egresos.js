@@ -6,13 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal');
 
     const mostrarMensaje = (texto, tipo = 'success') => {
-        const toast = document.createElement('div');
-        toast.textContent = texto;
-        toast.className = `toast toast-${tipo}`;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
+        Swal.fire({
+            icon: tipo,
+            title: tipo === 'success' ? '¡Éxito!' : '¡Error!',
+            text: texto,
+            confirmButtonText: 'Aceptar',
+            timer: 3000,
+            timerProgressBar: true
+        });
     };
-
     const cargarEgresos = () => {
         const year = añoSelect.value;
         const mes = mesSelect.value;
@@ -86,26 +88,36 @@ document.addEventListener('DOMContentLoaded', () => {
         tablaBody.querySelectorAll('.btn-eliminar').forEach(btn => {
             btn.addEventListener('click', () => {
                 const { id, tipo } = btn.dataset;
-
-                if (!confirm('¿Deseas eliminar este egreso? Esta acción no se puede deshacer.')) return;
-
-                fetch('../controller/EliminarEgresoController.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `id=${id}&tipo=${tipo}`
-                })
-                    .then(res => res.text())
-                    .then(msg => {
-                        if (msg.includes('correctamente')) {
-                            cargarEgresos();
-                        } else {
-                            mostrarMensaje('No se pudo eliminar: ' + msg, 'error');
-                        }
-                    })
-                    .catch(err => {
-                        console.error('Error al eliminar:', err);
-                        mostrarMensaje('Error al eliminar el egreso.', 'error');
-                    });
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: 'Esta acción no se puede deshacer.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: '#6c757d'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch('../controller/EliminarEgresoController.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: `id=${id}&tipo=${tipo}`
+                        })
+                            .then(res => res.text())
+                            .then(msg => {
+                                if (msg.includes('correctamente')) {
+                                    cargarEgresos();
+                                } else {
+                                    mostrarMensaje('No se pudo eliminar: ' + msg, 'error');
+                                }
+                            })
+                            .catch(err => {
+                                console.error('Error al eliminar:', err);
+                                mostrarMensaje('Error al eliminar el egreso.', 'error');
+                            });
+                    }
+                });
             });
         });
     };
@@ -145,7 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
             })
                 .then(res => res.text())
                 .then(msg => {
-                    mostrarMensaje(msg);
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Editado!',
+                        text: 'El egreso fue editado exitosamente.',
+                        confirmButtonText: 'Aceptar'
+                    });
                     cerrarModal();
                     cargarEgresos();
                 })
