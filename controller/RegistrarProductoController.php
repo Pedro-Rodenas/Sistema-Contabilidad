@@ -26,9 +26,9 @@ class RegistrarProductoController
         $model->setData($ruc, $razon_social, $nro_factura, $fecha_compra, $nombre, $cantidad, $precio, $descripcion, $igv, $tipo, $descuento);
 
         if ($model->registrar()) {
-            header('Location: ../view/Registrar_Egreso.php');
+            header('Location: ../view/Registrar_Egreso.php?registro=exito');
         } else {
-            echo "Error al registrar producto.";
+            header('Location: ../view/Registrar_Egreso.php?registro=error');
         }
     }
 }

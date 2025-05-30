@@ -231,6 +231,27 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
         </section>
     </main>
     <script src="../assets/js/mostrar_formulario.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const registro = urlParams.get('registro');
+
+        if (registro === 'exito') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Registrado',
+                text: 'El egreso fue registrado exitosamente.',
+                confirmButtonText: 'Aceptar'
+            });
+        } else if (registro === 'error') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Ocurrió un error al registrar el egreso.',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    </script>
 </body>
 
 </html>

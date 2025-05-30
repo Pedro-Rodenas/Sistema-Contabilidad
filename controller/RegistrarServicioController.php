@@ -25,9 +25,9 @@ class RegistrarServicioController
         $model->setData($ruc, $razon_social, $nro_factura, $fecha_servicio, $nombre, $periodo, $precio, $descripcion, $igv, $tipo);
 
         if ($model->registrar()) {
-            header('Location: ../view/Registrar_Egreso.php');
+            header('Location: ../view/Registrar_Egreso.php?registro=exito');
         } else {
-            echo "Error al registrar servicio.";
+            header('Location: ../view/Registrar_Egreso.php?registro=error');
         }
     }
 }
