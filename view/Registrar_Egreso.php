@@ -104,7 +104,7 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     </div>
                     <div>
                         <label for="descuento">Descuento:</label>
-                        <input autocomplete="off" type="number" step="0.01" name="descuento" required>
+                        <input autocomplete="off" type="number" step="0.01" name="descuento">
                     </div>
                 </div>
 

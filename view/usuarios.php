@@ -47,12 +47,12 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] !== 'admin') {
             <input type="hidden" name="id" id="id">
 
             <label>Usuario:
-                <input type="text" name="user" required>
+                <input autocomplete="off" type="text" name="user" required>
             </label>
 
             <label>Contraseña:
                 <div class="input-password">
-                    <input type="password" name="pass" id="input-pass" autocomplete="new-password" required>
+                    <input autocomplete="off" type="password" name="pass" id="input-pass" autocomplete="new-password" required>
                     <span class="toggle-pass" onclick="togglePassword()">👁️</span>
                 </div>
             </label>
