@@ -21,14 +21,22 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_rol'] !== 'admin') {
 
 <body>
     <header>
-        <img src="../assets/img/logo.png" alt="">
-        <a href="Registrar_Egreso.php">Registrar Egreso</a>
-        <a href="Egresos.php">Egresos</a>
-        <a href="Estadisticas.php">Estadísticas</a>
-        <a href="Reporte.php">Reporte</a>
-        <a class="usuarios-xd" href="usuarios.php">Admin</a>
-        <p class="derecho_reservado">© 2025 Aprode Perú - Todos los derechos reservados</p>
-        <a href="../controller/logout.php">Cerrar sesión</a>
+        <div class="logo-container">
+            <img src="../assets/img/logo.png" alt="Logo Aprode Perú">
+        </div>
+
+        <nav class="nav-links">
+            <a href="Registrar_Egreso.php">Registrar Egreso</a>
+            <a href="Egresos.php">Egresos</a>
+            <a href="Estadisticas.php">Estadísticas</a>
+            <a href="Reporte.php">Reporte</a>
+            <a href="usuarios.php">Administración</a>
+        </nav>
+
+        <div class="footer-section">
+            <p class="derecho_reservado">© 2025 Aprode Perú<br>Todos los derechos reservados</p>
+            <a class="logout-button" href="../controller/logout.php">Cerrar sesión</a>
+        </div>
     </header>
 
     <main>
