@@ -99,6 +99,35 @@ class TablaEgresosModel
 
         $egresos = array_merge($egresos, $stmtConsumo->fetchAll(PDO::FETCH_ASSOC));
 
+        /* Transferencias */
+        $queryTransferencia = "
+            SELECT 
+                id_transferencia AS id,
+                fecha_transferencia AS fecha,
+                'Transferencia' AS tipo_egreso,
+                detalle_transferencia AS nombre,
+                NULL AS cantidad,
+                monto_transferencia AS precio,
+                NULL AS igv,
+                tipo AS tipo_factura,
+                NULL AS descripcion,
+                dni_transferencia AS ruc,
+                razon_social,
+                nro_factura,
+                tipo_transferencia AS tipo_origen,
+                'activo' AS estado
+            FROM egresos_transferencia
+            WHERE YEAR(fecha_transferencia) = :anio AND MONTH(fecha_transferencia) = :mes
+        ";
+
+        $stmtTransferencia = $this->conn->prepare($queryTransferencia);
+        $stmtTransferencia->bindParam(':anio', $anio, PDO::PARAM_INT);
+        $stmtTransferencia->bindParam(':mes', $mes, PDO::PARAM_INT);
+        $stmtTransferencia->execute();
+
+        $egresos = array_merge($egresos, $stmtTransferencia->fetchAll(PDO::FETCH_ASSOC));
+
+
         return $egresos;
     }
 
