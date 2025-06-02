@@ -48,6 +48,7 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     <option value="producto">Producto</option>
                     <option value="servicio">Servicio</option>
                     <option value="consumo">Consumo</option>
+                    <option value="transferencia">Transferencia</option>
                 </select>
             </div>
 
@@ -227,6 +228,48 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                 <div class="form-group">
                     <label for="descripcion">Descripción:</label>
                     <textarea name="descripcion" id="descripcion"></textarea>
+                </div>
+
+                <button type="submit">Registrar Consumo</button>
+            </form>
+
+            <!-- Transferencia -->
+            <form id="form_transferencia" class="form-egreso" method="POST" action="../controller/RegistrarTransferenciaController.php" style="display: none;">
+                <div class="form-group doble">
+                    <div class="form-group">
+                        <label for="ruc">RUC/DNI:</label>
+                        <input autocomplete="off" type="text" name="ruc" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="razon_social">Razón Social:</label>
+                        <input autocomplete="off" type="text" name="razon_social" required>
+                    </div>
+                </div>
+                <div class="form-group doble">
+                    <div class="form-group">
+                        <label for="tipo">Tipo De Recibo:</label>
+                        <select class="select-serie" name="tipo" id="tipo" required>
+                            <option value="Constancia">Constancia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nro_factura">N° Constancia:</label>
+                        <input autocomplete="off" type="text" name="nro_factura" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_transferencia">Fecha del Transferencia:</label>
+                        <input autocomplete="off" type="date" name="fecha_transferencia" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="datalle_transferencia">Detalle de Transferencia:</label>
+                    <input autocomplete="off" type="text" name="detalle_transferencia" required>
+                </div>
+                <div class="form-group doble">
+                    <div class="form-group">
+                        <label for="monto_transferencia">Valor de Transferencia:</label>
+                        <input autocomplete="off" type="number" step="0.01" name="monto_transferencia" required>
+                    </div>
                 </div>
 
                 <button type="submit">Registrar Consumo</button>

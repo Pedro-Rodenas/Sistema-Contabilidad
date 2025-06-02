@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formProducto = document.getElementById("form_producto");
     const formServicio = document.getElementById("form_servicio");
     const formConsumo = document.getElementById("form_consumo");
+    const formTransferencia = document.getElementById("form_transferencia");
 
     const hideAllForms = () => {
         [formProducto, formServicio, formConsumo].forEach(form => {
@@ -31,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
             showForm(formServicio);
         } else if (tipoEgreso.value === "consumo") {
             showForm(formConsumo);
+        } else if (tipoEgreso.value === "transferencia") {
+            showForm(formTransferencia);
         }
     });
 });
