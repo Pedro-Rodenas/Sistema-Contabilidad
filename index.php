@@ -20,15 +20,23 @@
                 <form id="form-login" method="POST" action="controller/login_user.php">
                     <label>Usuario:</label>
                     <input autocomplete="off" type="text" name="user" required>
+                    <div class="error-message" id="user-error"></div>
 
                     <label>Contraseña:</label>
                     <input autocomplete="off" type="password" name="pass" required>
+                    <div class="error-message" id="pass-error"></div>
+
+                    <div class="error-message" id="login-error"></div>
 
                     <button type="submit">Iniciar sesión</button>
                 </form>
             </div>
         </div>
     </main>
+    <script>
+        const loginErrorFlag = <?= isset($_GET['error']) && $_GET['error'] == 1 ? 'true' : 'false' ?>;
+    </script>
+    <script src="assets/js/validacion_index.js"></script>
 </body>
 
 

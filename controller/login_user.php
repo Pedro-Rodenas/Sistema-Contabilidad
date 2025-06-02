@@ -21,6 +21,6 @@ if ($usuario && $usuario['pass'] === $pass) {
     }
     exit;
 } else {
-    header('Location: ../index.php');
+    header('Location: ../index.php?error=1');
     exit;
 }
