@@ -58,7 +58,8 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                 <div class="form-group doble">
                     <div class="form-group">
                         <label for="ruc">RUC:</label>
-                        <input autocomplete="off" type="text" name="ruc" required>
+                        <input autocomplete="off" type="number" name="ruc" class="ruc-input" pattern="\d{11}" maxlength="11" required>
+                        <div class="error-message ruc-error"></div>
                     </div>
                     <div class="form-group">
                         <label for="razon_social">Razón Social:</label>
@@ -121,7 +122,9 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                 <div class="form-group doble">
                     <div class="form-group">
                         <label for="ruc">RUC:</label>
-                        <input autocomplete="off" type="text" name="ruc" required>
+                        <input autocomplete="off" type="number" name="ruc" class="ruc-input" pattern="\d{11}" maxlength="11" required>
+
+                        <div class="error-message ruc-error"></div>
                     </div>
                     <div class="form-group">
                         <label for="razon_social">Razón Social:</label>
@@ -177,7 +180,8 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                 <div class="form-group doble">
                     <div class="form-group">
                         <label for="ruc">RUC:</label>
-                        <input autocomplete="off" type="text" name="ruc" required>
+                        <input autocomplete="off" type="number" name="ruc" class="ruc-input" pattern="\d{11}" maxlength="11" required>
+                        <div class="error-message ruc-error"></div>
                     </div>
                     <div class="form-group">
                         <label for="razon_social">Razón Social:</label>
@@ -231,6 +235,7 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
         </section>
     </main>
     <script src="../assets/js/mostrar_formulario.js"></script>
+    <script src="../assets/js/validaciones_registro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
