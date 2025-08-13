@@ -178,3 +178,20 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+CREATE TABLE `egresos_transferencia` (
+  `id_transferencia` int(11) NOT NULL AUTO_INCREMENT,
+  `dni_transferencia` int(11) NOT NULL,
+  `razon_social` varchar(50) NOT NULL,
+  `nro_factura` int(11) NOT NULL,
+  `fecha_transferencia` date NOT NULL,
+  `detalle_transferencia` varchar(50) NOT NULL,
+  `monto_transferencia` int(11) NOT NULL,
+  `tipo_transferencia` varchar(50) DEFAULT 'transferencia',
+  `tipo` varchar(50) NOT NULL,
+  `adquisicion` decimal(10,2) DEFAULT 0.00,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id_transferencia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
