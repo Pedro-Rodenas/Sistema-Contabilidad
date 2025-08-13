@@ -74,6 +74,7 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                         <select class="select-serie" name="tipo" id="tipo">
                             <option value="Factura">Factura</option>
                             <option value="Boleta">Boleta</option>
+                            <option value="Ticket">Ticket</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -92,10 +93,6 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                 </div>
 
                 <div class="form-group doble">
-                    <div>
-                        <label for="cantidad">Cantidad:</label>
-                        <input autocomplete="off" type="text" name="cantidad" required>
-                    </div>
                     <div>
                         <label for="precio">Valor de Venta:</label>
                         <input autocomplete="off" type="number" step="0.01" name="precio" required>
@@ -154,10 +151,10 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     <input autocomplete="off" type="text" name="name" required>
                 </div>
                 <div class="form-group doble">
-                    <div class="form-group">
+                    <!--                     <div class="form-group">
                         <label for="periodo_consumo">Periodo de Consumo:</label>
                         <input autocomplete="off" type="text" name="periodo_consumo" required>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="precio">Valor de Servicio:</label>
                         <input type="number" step="0.01" name="precio" required>
@@ -195,6 +192,7 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                         <select class="select-serie" name="tipo" id="tipo" required>
                             <option value="Factura">Factura</option>
                             <option value="Boleta">Boleta</option>
+                            <option value="Recibo">Recibo</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -211,10 +209,10 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     <input autocomplete="off" type="text" name="nombre_consumo" required>
                 </div>
                 <div class="form-group doble">
-                    <div class="form-group">
+                    <!--                     <div class="form-group">
                         <label for="cant_consumo">Cantidad de Consumo:</label>
                         <input autocomplete="off" type="text" name="cant_consumo" required>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="precio_consumo">Valor de Consumo:</label>
                         <input autocomplete="off" type="number" step="0.01" name="precio_consumo" required>
@@ -269,6 +267,10 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     <div class="form-group">
                         <label for="monto_transferencia">Valor de Transferencia:</label>
                         <input autocomplete="off" type="number" step="0.01" name="monto_transferencia" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adquisicion">Adquisición / Comisión:</label>
+                        <input autocomplete="off" type="number" step="0.01" name="adquisicion" value="0.00" required>
                     </div>
                 </div>
 

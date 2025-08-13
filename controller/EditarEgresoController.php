@@ -5,7 +5,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
     $tipo = $_POST['tipo'];
     $nombre = $_POST['nombre'];
-    $cantidad = $_POST['cantidad'];
     $precio = $_POST['precio'];
     $igv = $_POST['igv'];
 
@@ -14,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = false;
 
     if ($tipo === 'Producto') {
-        $resultado = $model->editarProducto($id, $nombre, $cantidad, $precio, $igv);
+        $resultado = $model->editarProducto($id, $nombre, $precio, $igv);
     } elseif ($tipo === 'Servicio') {
-        $resultado = $model->editarServicio($id, $nombre, $cantidad, $precio, $igv);
+        $resultado = $model->editarServicio($id, $nombre, $precio, $igv);
     } elseif ($tipo === 'Consumo') {
-        $resultado = $model->editarConsumo($id, $nombre, $cantidad, $precio, $igv);
+        $resultado = $model->editarConsumo($id, $nombre, $precio, $igv);
     } else {
         http_response_code(400);
         echo "Tipo de egreso no válido.";

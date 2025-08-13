@@ -47,30 +47,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     const precio = parseFloat(row.precio) || 0;
                     const igv = parseFloat(row.igv) || 0;
                     const subtotal = precio + igv;
-                    const descuentoPorcentaje = parseFloat(row.descuento) || 0;
-                    const montoDescuento = subtotal * (descuentoPorcentaje / 100);
-                    const descuento = parseFloat(row.descuento) || 0;
-                    const total = subtotal - montoDescuento;
+
+                    const descuentoFijo = parseFloat(row.descuento) || 0;
+                    const montoDescuento = descuentoFijo;
+                    const adquisicion = parseFloat(row.adquisicion) || 0;
+                    const total = subtotal - montoDescuento + adquisicion;
 
                     totalPrecio += precio;
                     totalIGV += igv;
                     totalConIGV += total;
 
                     tr.innerHTML = `
-                        <td>${row.fecha}</td>
-                        <td>${row.tipo_factura}</td>
-                        <td>${row.tipo_egreso}</td>
-                        <td>${row.nombre}</td>
-                        <td>${row.cantidad ?? 'N/A'}</td>
-                        <td>S/. ${precio.toFixed(2)}</td>
-                        <td>S/. ${igv.toFixed(2)}</td>
-                        <td>${descuentoPorcentaje.toFixed(2)}%</td>
-                        <td><strong>S/. ${total.toFixed(2)}</strong></td>
-                        <td>
-                            <button class="btn-editar" onclick='abrirModal(${JSON.stringify(row)})'>Editar</button>
-                            <button class="btn-eliminar" data-id="${row.id}" data-tipo="${row.tipo_egreso}">Eliminar</button>
-                        </td>
-                    `;
+                            <td>${row.fecha}</td>
+                            <td>${row.tipo_factura}</td>
+                            <td>${row.tipo_egreso}</td>
+                            <td>${row.nombre}</td>
+                            <td>S/. ${precio.toFixed(2)}</td>
+                            <td>S/. ${igv.toFixed(2)}</td>
+                            <td>S/. ${descuentoFijo.toFixed(2)}</td>
+                            <td>S/. ${adquisicion.toFixed(2)}</td>
+                            <td><strong>S/. ${total.toFixed(2)}</strong></td>
+                            <td>
+                                <button class="btn-editar" onclick='abrirModal(${JSON.stringify(row)})'>Editar</button>
+                                <button class="btn-eliminar" data-id="${row.id}" data-tipo="${row.tipo_egreso}">Eliminar</button>
+                            </td>
+                        `;
 
                     fragment.appendChild(tr);
                 });

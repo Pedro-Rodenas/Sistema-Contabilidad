@@ -17,6 +17,7 @@ class RegistrarTransferenciaController
         $detalle_transferencia = $_POST['detalle_transferencia']; 
         $monto_transferencia = $_POST['monto_transferencia'];
         $tipo = $_POST['tipo'];
+        $adquisicion = $_POST['adquisicion'];
 
         $model = new RegistrarTransferenciaModel();
         $model->setData(
@@ -26,7 +27,8 @@ class RegistrarTransferenciaController
             $fecha_transferencia,
             $detalle_transferencia,
             $monto_transferencia,
-            $tipo
+            $tipo,
+            $adquisicion
         );
 
         if ($model->registrar()) {

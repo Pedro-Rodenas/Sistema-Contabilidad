@@ -30,7 +30,7 @@ class RegistrarConsumoModel
             $stmt = $this->conn->prepare($sql);
 
             // Ejecutamos la consulta pasando los valores
-            return $stmt->execute([
+            return $stmt->execute([ 
                 ':ruc' => $this->data['ruc'],
                 ':razon_social' => $this->data['razon_social'],
                 ':nro_factura' => $this->data['nro_factura'],

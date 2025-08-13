@@ -12,17 +12,17 @@ class RegistrarServicioModel
         $this->conn = $db->connect();
     }
 
-    public function setData($ruc, $razon_social, $nro_factura, $fecha_servicio, $nombre, $periodo, $precio, $descripcion, $igv, $tipo)
+    public function setData($ruc, $razon_social, $nro_factura, $fecha_servicio, $nombre, $precio, $descripcion, $igv, $tipo)
     {
-        $this->data = compact('ruc', 'razon_social', 'nro_factura', 'fecha_servicio', 'nombre', 'periodo', 'precio', 'descripcion', 'igv', 'tipo');
+        $this->data = compact('ruc', 'razon_social', 'nro_factura', 'fecha_servicio', 'nombre', 'precio', 'descripcion', 'igv', 'tipo');
     }
 
     public function registrar()
     {
         try {
             $sql = "INSERT INTO egresos_servicios 
-                    (ruc, razon_social, nro_factura, fecha_servicio, nombre_servicio, tipo_servicio, periodo_consumo, precio_servicio, descripcion, igv, tipo)
-                    VALUES (:ruc, :razon_social, :nro_factura, :fecha_servicio, :nombre, 'Servicio', :periodo, :precio, :descripcion, :igv, :tipo)";
+                    (ruc, razon_social, nro_factura, fecha_servicio, nombre_servicio, tipo_servicio_consumo, precio_servicio, descripcion, igv, tipo)
+                    VALUES (:ruc, :razon_social, :nro_factura, :fecha_servicio, :nombre, 'Servicio', :precio, :descripcion, :igv, :tipo)";
             $stmt = $this->conn->prepare($sql);
             return $stmt->execute([
                 ':ruc' => $this->data['ruc'],
@@ -30,7 +30,6 @@ class RegistrarServicioModel
                 ':nro_factura' => $this->data['nro_factura'],
                 ':fecha_servicio' => $this->data['fecha_servicio'],
                 ':nombre' => $this->data['nombre'],
-                ':periodo' => $this->data['periodo'],
                 ':precio' => $this->data['precio'],
                 ':descripcion' => $this->data['descripcion'],
                 ':igv' => $this->data['igv'],

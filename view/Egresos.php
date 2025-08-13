@@ -76,10 +76,10 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                             <th>Comprobante</th>
                             <th>Tipo de Egreso</th>
                             <th>Nombre</th>
-                            <th>Cantidad</th>
                             <th>Base imponible</th>
                             <th>IGV (18%)</th>
                             <th>Descuento</th>
+                            <th>Adquisición (Comisión)</th>
                             <th>Total</th>
                             <th>Acciones</th>
                         </tr>
@@ -106,9 +106,6 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
 
                 <label for="editar-nombre">Nombre:</label>
                 <input type="text" id="editar-nombre" name="nombre">
-
-                <label for="editar-cantidad">Cantidad / Periodo:</label>
-                <input type="text" id="editar-cantidad" name="cantidad">
 
                 <label for="editar-precio">Base Imponible:</label>
                 <input type="text" id="editar-precio" name="precio">

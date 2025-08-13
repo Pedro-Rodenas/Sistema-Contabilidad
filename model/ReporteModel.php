@@ -24,7 +24,6 @@ class TablaEgresosModel
                 fecha_compra AS fecha,
                 'Producto' AS tipo_egreso,
                 nombre_producto AS nombre,
-                cant_productos AS cantidad,
                 precio_producto AS precio,
                 igv,
                 tipo AS tipo_factura,
@@ -53,7 +52,6 @@ class TablaEgresosModel
                 fecha_servicio AS fecha,
                 'Servicio' AS tipo_egreso,
                 nombre_servicio AS nombre,
-                periodo_consumo AS cantidad,
                 precio_servicio AS precio,
                 igv,
                 tipo AS tipo_factura,
@@ -83,7 +81,6 @@ class TablaEgresosModel
                 fecha_consumo AS fecha,
                 'Consumo' AS tipo_egreso,
                 nombre_consumo AS nombre,
-                cant_consumo AS cantidad,
                 precio_consumo AS precio,
                 igv,
                 tipo AS tipo_factura,
@@ -170,7 +167,6 @@ class TablaEgresosModel
             $pdf->Cell(25, 8, $e['fecha'], 1, 0, 'C');
             $pdf->Cell(25, 8, $e['tipo_egreso'], 1, 0, 'C');
             $pdf->Cell(40, 8, substr($e['nombre'], 0, 20), 1, 0, 'C');
-            $pdf->Cell(15, 8, $e['cantidad'], 1, 0, 'C');
             $pdf->Cell(20, 8, $e['precio'], 1, 0, 'C');
             $pdf->Cell(20, 8, $e['igv'], 1, 0, 'C');
             $pdf->Cell(35, 8, $e['nro_factura'], 1, 1, 'C');

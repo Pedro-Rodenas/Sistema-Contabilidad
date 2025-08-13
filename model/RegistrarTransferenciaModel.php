@@ -5,24 +5,23 @@ class RegistrarTransferenciaModel
 {
     private $conn;
     private $data = [];
-
     public function __construct()
     {
         $db = new Database();
         $this->conn = $db->connect();
     }
 
-    public function setData($dni_transferencia, $razon_social, $nro_factura, $fecha_transferencia, $detalle_transferencia, $monto_transferencia, $tipo)
+    public function setData($dni_transferencia, $razon_social, $nro_factura, $fecha_transferencia, $detalle_transferencia, $monto_transferencia, $tipo, $adquisicion)
     {
-        $this->data = compact('dni_transferencia', 'razon_social', 'nro_factura', 'fecha_transferencia', 'detalle_transferencia', 'monto_transferencia', 'tipo');
+        $this->data = compact('dni_transferencia', 'razon_social', 'nro_factura', 'fecha_transferencia', 'detalle_transferencia', 'monto_transferencia', 'tipo', 'adquisicion');
     }
 
     public function registrar()
     {
         try {
             $sql = "INSERT INTO egresos_transferencia
-                (dni_transferencia, razon_social, nro_factura, fecha_transferencia, detalle_transferencia, tipo_transferencia, monto_transferencia, tipo)
-                VALUES (:dni_transferencia, :razon_social, :nro_factura, :fecha_transferencia, :detalle_transferencia, 'transferencia', :monto_transferencia, :tipo)";
+                (dni_transferencia, razon_social, nro_factura, fecha_transferencia, detalle_transferencia, tipo_transferencia, monto_transferencia, tipo, adquisicion)
+                VALUES (:dni_transferencia, :razon_social, :nro_factura, :fecha_transferencia, :detalle_transferencia, 'transferencia', :monto_transferencia, :tipo, :adquisicion)";
 
             $stmt = $this->conn->prepare($sql);
             return $stmt->execute([
@@ -32,7 +31,8 @@ class RegistrarTransferenciaModel
                 ':fecha_transferencia' => $this->data['fecha_transferencia'],
                 ':detalle_transferencia' => $this->data['detalle_transferencia'],
                 ':monto_transferencia' => $this->data['monto_transferencia'],
-                ':tipo' => $this->data['tipo']
+                ':tipo' => $this->data['tipo'],
+                ':adquisicion' => $this->data['adquisicion']
             ]);
         } catch (PDOException $e) {
             echo "Error al registrar transferencia: " . $e->getMessage();

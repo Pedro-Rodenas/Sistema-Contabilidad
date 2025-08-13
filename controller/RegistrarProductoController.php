@@ -15,7 +15,6 @@ class RegistrarProductoController
         $nro_factura = $_POST['nro_factura'];
         $fecha_compra = $_POST['fecha_compra'];
         $nombre = $_POST['name'];
-        $cantidad = $_POST['cantidad'];
         $precio = $_POST['precio'];
         $descripcion = $_POST['descripcion'];
         $igv = $_POST['igv'];
@@ -23,7 +22,7 @@ class RegistrarProductoController
         $descuento = $_POST['descuento'];
 
         $model = new RegistrarProductoModel();
-        $model->setData($ruc, $razon_social, $nro_factura, $fecha_compra, $nombre, $cantidad, $precio, $descripcion, $igv, $tipo, $descuento);
+        $model->setData($ruc, $razon_social, $nro_factura, $fecha_compra, $nombre, $precio, $descripcion, $igv, $tipo, $descuento);
 
         if ($model->registrar()) {
             header('Location: ../view/Registrar_Egreso.php?registro=exito');
