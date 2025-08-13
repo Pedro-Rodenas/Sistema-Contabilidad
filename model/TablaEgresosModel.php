@@ -100,25 +100,25 @@ class TablaEgresosModel
 
         /* Transferencias */
         $queryTransferencia = "
-    SELECT 
-        id_transferencia AS id,
-        fecha_transferencia AS fecha,
-        'Transferencia' AS tipo_egreso,
-        detalle_transferencia AS nombre,
-        monto_transferencia AS precio,
-        NULL AS igv,
-        tipo AS tipo_factura,
-        NULL AS descripcion,
-        dni_transferencia AS ruc,
-        razon_social,
-        nro_factura,
-        NULL AS descuento,
-        tipo_transferencia AS tipo_origen,
-        adquisicion,
-        'activo' AS estado
-    FROM egresos_transferencia
-    WHERE YEAR(fecha_transferencia) = :anio AND MONTH(fecha_transferencia) = :mes
-";
+        SELECT 
+            id_transferencia AS id,
+            fecha_transferencia AS fecha,
+            'Transferencia' AS tipo_egreso,
+            detalle_transferencia AS nombre,
+            monto_transferencia AS precio,
+            NULL AS igv,
+            tipo AS tipo_factura,
+            NULL AS descripcion,
+            dni_transferencia AS ruc,
+            razon_social,
+            nro_factura,
+            NULL AS descuento,
+            tipo_transferencia AS tipo_origen,
+            adquisicion,
+            'activo' AS estado
+        FROM egresos_transferencia
+        WHERE YEAR(fecha_transferencia) = :anio AND MONTH(fecha_transferencia) = :mes
+    ";
 
 
         $stmtTransferencia = $this->conn->prepare($queryTransferencia);
@@ -204,15 +204,13 @@ class TablaEgresosModel
     }
 
     // Editar Transferencia
-    public function editarTransferencia($id, $nombre, $precio, $igv, $fecha, $descuento, $adquisicion)
+    public function editarTransferencia($id, $nombre, $precio, $igv, $fecha, $descueto, $adquisicion)
     {
         $query = "
         UPDATE egresos_transferencia 
         SET detalle_transferencia = :nombre,
             monto_transferencia = :precio,
-            igv = :igv,
             fecha_transferencia = :fecha,
-            descuento = :descuento,
             adquisicion = :adquisicion
         WHERE id_transferencia = :id
     ";
@@ -221,13 +219,12 @@ class TablaEgresosModel
         return $stmt->execute([
             ':nombre' => $nombre,
             ':precio' => $precio,
-            ':igv' => $igv,
             ':fecha' => $fecha,
-            ':descuento' => $descuento,
             ':adquisicion' => $adquisicion,
             ':id' => $id
         ]);
     }
+
 
     /* Método para eliminar producto */
     public function eliminarProducto($id)
@@ -260,6 +257,19 @@ class TablaEgresosModel
             DELETE FROM egresos_consumo 
             WHERE id_consumo = :id
         ";
+
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([':id' => $id]);
+    }
+
+    /* Método para eliminar Transferencia */
+    /* Método para eliminar Transferencia */
+    public function eliminarTransferencia($id)
+    {
+        $query = "
+        DELETE FROM egresos_transferencia 
+        WHERE id_transferencia = :id
+    ";
 
         $stmt = $this->conn->prepare($query);
         return $stmt->execute([':id' => $id]);
