@@ -250,6 +250,7 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                         <label for="tipo">Tipo De Recibo:</label>
                         <select class="select-serie" name="tipo" id="tipo" required>
                             <option value="Constancia">Constancia</option>
+                            <option value="Recibo">Recibo</option>
                         </select>
                     </div>
                     <div class="form-group">

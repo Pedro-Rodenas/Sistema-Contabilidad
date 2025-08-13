@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const rucValue = rucInput.value.trim();
 
-            if (!/^\d{11}$/.test(rucValue)) {
-                rucErrorDiv.textContent = 'El RUC debe tener exactamente 11 dígitos numéricos.';
+            if (!/^\d{11}$/.test(rucValue) && !/^\d{8}$/.test(rucValue)) {
+                rucErrorDiv.textContent = 'El RUC debe tener 11 dígitos o el DNI 8 dígitos numéricos.';
                 formIsValid = false;
             }
 
