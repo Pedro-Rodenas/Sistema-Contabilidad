@@ -137,9 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.abrirModal = (egreso) => {
         document.getElementById('editar-id').value = egreso.id;
         document.getElementById('editar-nombre').value = egreso.nombre;
-        document.getElementById('editar-cantidad').value = egreso.cantidad ?? '';
         document.getElementById('editar-precio').value = egreso.precio;
         document.getElementById('editar-igv').value = egreso.igv ?? '';
+        document.getElementById('editar-adquisicion').value = egreso.adquisicion ?? '';
         document.getElementById('editar-origen').value = egreso.tipo_egreso;
         modal.style.display = 'block';
     };

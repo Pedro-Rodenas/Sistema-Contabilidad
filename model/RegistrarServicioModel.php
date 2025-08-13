@@ -21,7 +21,7 @@ class RegistrarServicioModel
     {
         try {
             $sql = "INSERT INTO egresos_servicios 
-                    (ruc, razon_social, nro_factura, fecha_servicio, nombre_servicio, tipo_servicio_consumo, precio_servicio, descripcion, igv, tipo)
+                    (ruc, razon_social, nro_factura, fecha_servicio, nombre_servicio, tipo_servicio, precio_servicio, descripcion, igv, tipo)
                     VALUES (:ruc, :razon_social, :nro_factura, :fecha_servicio, :nombre, 'Servicio', :precio, :descripcion, :igv, :tipo)";
             $stmt = $this->conn->prepare($sql);
             return $stmt->execute([

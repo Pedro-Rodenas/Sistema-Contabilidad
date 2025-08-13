@@ -98,24 +98,26 @@ class TablaEgresosModel
 
         /* Transferencias */
         $queryTransferencia = "
-            SELECT 
-                id_transferencia AS id,
-                fecha_transferencia AS fecha,
-                'Transferencia' AS tipo_egreso,
-                detalle_transferencia AS nombre,
-                monto_transferencia AS precio,
-                NULL AS igv,
-                tipo AS tipo_factura,
-                NULL AS descripcion,
-                dni_transferencia AS ruc,
-                razon_social,
-                nro_factura,
-                tipo_transferencia AS tipo_origen,
-                adquisicion,
-                'activo' AS estado
-            FROM egresos_transferencia
-            WHERE YEAR(fecha_transferencia) = :anio AND MONTH(fecha_transferencia) = :mes
-        ";
+    SELECT 
+        id_transferencia AS id,
+        fecha_transferencia AS fecha,
+        'Transferencia' AS tipo_egreso,
+        detalle_transferencia AS nombre,
+        monto_transferencia AS precio,
+        NULL AS igv,
+        tipo AS tipo_factura,
+        NULL AS descripcion,
+        dni_transferencia AS ruc,
+        razon_social,
+        nro_factura,
+        NULL AS descuento,
+        tipo_transferencia AS tipo_origen,
+        adquisicion,
+        'activo' AS estado
+    FROM egresos_transferencia
+    WHERE YEAR(fecha_transferencia) = :anio AND MONTH(fecha_transferencia) = :mes
+";
+
 
         $stmtTransferencia = $this->conn->prepare($queryTransferencia);
         $stmtTransferencia->bindParam(':anio', $anio, PDO::PARAM_INT);
@@ -123,7 +125,6 @@ class TablaEgresosModel
         $stmtTransferencia->execute();
 
         $egresos = array_merge($egresos, $stmtTransferencia->fetchAll(PDO::FETCH_ASSOC));
-
 
         return $egresos;
     }
@@ -182,6 +183,25 @@ class TablaEgresosModel
             ':nombre' => $nombre,
             ':precio' => $precio,
             ':igv' => $igv,
+            ':id' => $id
+        ]);
+    }
+
+    public function editarTransferencia($id, $nombre, $precio, $adquisicion)
+    {
+        $query = "
+        UPDATE egresos_transferencia 
+        SET detalle_transferencia = :nombre, 
+            monto_transferencia = :precio,
+            adquisicion = :adquisicion
+        WHERE id_transferencia = :id
+    ";
+
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([
+            ':nombre' => $nombre,
+            ':precio' => $precio,
+            ':adquisicion' => $adquisicion,
             ':id' => $id
         ]);
     }

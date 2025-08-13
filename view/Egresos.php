@@ -113,6 +113,9 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                 <label for="editar-igv">IGV:</label>
                 <input type="text" id="editar-igv" name="igv">
 
+                <label for="editar-adquisicion">Adquisicion:</label>
+                <input type="number" step="0.01" id="editar-adquisicion" name="adquisicion">
+
                 <div class="modal-actions">
                     <button type="submit" class="btn-guardar">Guardar</button>
                     <button type="button" onclick="cerrarModal()" class="btn-cancelar">Cancelar</button>
