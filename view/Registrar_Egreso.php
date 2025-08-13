@@ -75,6 +75,7 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                             <option value="Factura">Factura</option>
                             <option value="Boleta">Boleta</option>
                             <option value="Ticket">Ticket</option>
+                            <option value="Recibi">Recibo</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -135,6 +136,7 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                         <select class="select-serie" name="tipo" id="tipo">
                             <option value="Factura">Factura</option>
                             <option value="Boleta">Boleta</option>
+                            <option value="Recibi">Recibo</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -151,10 +153,6 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     <input autocomplete="off" type="text" name="name" required>
                 </div>
                 <div class="form-group doble">
-                    <!--                     <div class="form-group">
-                        <label for="periodo_consumo">Periodo de Consumo:</label>
-                        <input autocomplete="off" type="text" name="periodo_consumo" required>
-                    </div> -->
                     <div class="form-group">
                         <label for="precio">Valor de Servicio:</label>
                         <input type="number" step="0.01" name="precio" required>
@@ -162,6 +160,10 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     <div>
                         <label for="precio">IGV (18%):</label>
                         <input autocomplete="off" type="number" step="0.01" name="igv" required>
+                    </div>
+                    <div>
+                        <label for="descuento">Descuento:</label>
+                        <input autocomplete="off" type="number" step="0.01" name="descuento">
                     </div>
                 </div>
 
@@ -209,10 +211,6 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     <input autocomplete="off" type="text" name="nombre_consumo" required>
                 </div>
                 <div class="form-group doble">
-                    <!--                     <div class="form-group">
-                        <label for="cant_consumo">Cantidad de Consumo:</label>
-                        <input autocomplete="off" type="text" name="cant_consumo" required>
-                    </div> -->
                     <div class="form-group">
                         <label for="precio_consumo">Valor de Consumo:</label>
                         <input autocomplete="off" type="number" step="0.01" name="precio_consumo" required>
@@ -220,6 +218,10 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                     <div>
                         <label for="igv">IGV (18%):</label>
                         <input autocomplete="off" type="number" step="0.01" name="igv" required>
+                    </div>
+                    <div>
+                        <label for="descuento">Descuento:</label>
+                        <input autocomplete="off" type="number" step="0.01" name="descuento">
                     </div>
                 </div>
 

@@ -57,7 +57,8 @@ class TablaEgresosModel
                 razon_social,
                 nro_factura,
                 tipo_servicio AS tipo_origen,
-                estado
+                estado,
+                descuento
             FROM egresos_servicios
             WHERE YEAR(fecha_servicio) = :anio AND MONTH(fecha_servicio) = :mes
         ";
@@ -84,7 +85,8 @@ class TablaEgresosModel
                 razon_social,
                 nro_factura,
                 tipo_consumo AS tipo_origen,
-                estado
+                estado,
+                descuento
             FROM egresos_consumo
             WHERE YEAR(fecha_consumo) = :anio AND MONTH(fecha_consumo) = :mes
         ";
@@ -129,14 +131,16 @@ class TablaEgresosModel
         return $egresos;
     }
 
-
-    public function editarProducto($id, $nombre, $precio, $igv)
+    // Editar Producto
+    public function editarProducto($id, $nombre, $precio, $igv, $fecha, $descuento)
     {
         $query = "
         UPDATE egresos_productos 
-        SET nombre_producto = :nombre, 
+        SET nombre_producto = :nombre,
             precio_producto = :precio,
-            igv = :igv 
+            igv = :igv,
+            fecha_compra = :fecha,
+            descuento = :descuento
         WHERE id_producto = :id
     ";
 
@@ -145,17 +149,22 @@ class TablaEgresosModel
             ':nombre' => $nombre,
             ':precio' => $precio,
             ':igv' => $igv,
+            ':fecha' => $fecha,
+            ':descuento' => $descuento,
             ':id' => $id
         ]);
     }
 
-    public function editarServicio($id, $nombre, $precio, $igv)
+    // Editar Servicio
+    public function editarServicio($id, $nombre, $precio, $igv, $fecha, $descuento)
     {
         $query = "
         UPDATE egresos_servicios 
-        SET nombre_servicio = :nombre, 
+        SET nombre_servicio = :nombre,
             precio_servicio = :precio,
-            igv = :igv
+            igv = :igv,
+            fecha_servicio = :fecha,
+            descuento = :descuento
         WHERE id_servicio = :id
     ";
 
@@ -164,17 +173,22 @@ class TablaEgresosModel
             ':nombre' => $nombre,
             ':precio' => $precio,
             ':igv' => $igv,
+            ':fecha' => $fecha,
+            ':descuento' => $descuento,
             ':id' => $id
         ]);
     }
 
-    public function editarConsumo($id, $nombre, $precio, $igv)
+    // Editar Consumo
+    public function editarConsumo($id, $nombre, $precio, $igv, $fecha, $descuento)
     {
         $query = "
         UPDATE egresos_consumo 
-        SET nombre_consumo = :nombre, 
+        SET nombre_consumo = :nombre,
             precio_consumo = :precio,
-            igv = :igv
+            igv = :igv,
+            fecha_consumo = :fecha,
+            descuento = :descuento
         WHERE id_consumo = :id
     ";
 
@@ -183,16 +197,22 @@ class TablaEgresosModel
             ':nombre' => $nombre,
             ':precio' => $precio,
             ':igv' => $igv,
+            ':fecha' => $fecha,
+            ':descuento' => $descuento,
             ':id' => $id
         ]);
     }
 
-    public function editarTransferencia($id, $nombre, $precio, $adquisicion)
+    // Editar Transferencia
+    public function editarTransferencia($id, $nombre, $precio, $igv, $fecha, $descuento, $adquisicion)
     {
         $query = "
         UPDATE egresos_transferencia 
-        SET detalle_transferencia = :nombre, 
+        SET detalle_transferencia = :nombre,
             monto_transferencia = :precio,
+            igv = :igv,
+            fecha_transferencia = :fecha,
+            descuento = :descuento,
             adquisicion = :adquisicion
         WHERE id_transferencia = :id
     ";
@@ -201,6 +221,9 @@ class TablaEgresosModel
         return $stmt->execute([
             ':nombre' => $nombre,
             ':precio' => $precio,
+            ':igv' => $igv,
+            ':fecha' => $fecha,
+            ':descuento' => $descuento,
             ':adquisicion' => $adquisicion,
             ':id' => $id
         ]);

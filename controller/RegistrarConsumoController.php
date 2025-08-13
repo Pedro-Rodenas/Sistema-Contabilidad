@@ -16,17 +16,17 @@ class RegistrarConsumoController
         $nro_factura = $_POST['nro_factura'];
         $fecha_consumo = $_POST['fecha_consumo'];
         $nombre = $_POST['nombre_consumo'];
-        $cantidad = $_POST['cant_consumo'];
         $precio = $_POST['precio_consumo'];
         $descripcion = $_POST['descripcion'];
         $igv = $_POST['igv'];
         $tipo = $_POST['tipo'];
+        $descuento = $_POST['descuento'];
 
 
         $model = new RegistrarConsumoModel();
 
 
-        $model->setData($ruc, $razon_social, $nro_factura, $fecha_consumo, $nombre, $cantidad, $precio, $descripcion, $igv, $tipo);
+        $model->setData($ruc, $razon_social, $nro_factura, $fecha_consumo, $nombre, $precio, $descripcion, $igv, $tipo, $descuento);
 
 
         if ($model->registrar()) {

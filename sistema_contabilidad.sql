@@ -195,3 +195,9 @@ CREATE TABLE `egresos_transferencia` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id_transferencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+
+
+ALTER TABLE egresos_servicios
+ADD COLUMN descuento DECIMAL(10,2) DEFAULT 0 AFTER precio_servicio;

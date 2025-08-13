@@ -116,6 +116,13 @@ if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_rol'], ['usu
                 <label for="editar-adquisicion">Adquisicion:</label>
                 <input type="number" step="0.01" id="editar-adquisicion" name="adquisicion">
 
+                <label for="editar-fecha">Fecha:</label>
+                <input type="date" id="editar-fecha" name="fecha">
+
+                <label for="editar-descuento">Descuento:</label>
+                <input type="number" step="0.01" id="editar-descuento" name="descuento">
+
+
                 <div class="modal-actions">
                     <button type="submit" class="btn-guardar">Guardar</button>
                     <button type="button" onclick="cerrarModal()" class="btn-cancelar">Cancelar</button>

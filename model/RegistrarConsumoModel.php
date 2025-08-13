@@ -12,10 +12,10 @@ class RegistrarConsumoModel
         $this->conn = $db->connect();
     }
 
-    public function setData($ruc, $razon_social, $nro_factura, $fecha_consumo, $nombre, $cantidad, $precio, $descripcion, $igv, $tipo)
+    public function setData($ruc, $razon_social, $nro_factura, $fecha_consumo, $nombre, $precio, $descripcion, $igv, $tipo, $descuento)
     {
         // Guardamos los datos en el array
-        $this->data = compact('ruc', 'razon_social', 'nro_factura', 'fecha_consumo', 'nombre', 'cantidad', 'precio', 'descripcion', 'igv', 'tipo');
+        $this->data = compact('ruc', 'razon_social', 'nro_factura', 'fecha_consumo', 'nombre', 'precio', 'descripcion', 'igv', 'tipo', 'descuento');
     }
 
     public function registrar()
@@ -23,8 +23,8 @@ class RegistrarConsumoModel
         try {
             // La consulta SQL para insertar los datos en la tabla egresos_consumo
             $sql = "INSERT INTO egresos_consumo 
-                    (`ruc`, `razon_social`, `nro_factura`, `fecha_consumo`, `nombre_consumo`, `tipo_consumo`, `cant_consumo`, `precio_consumo`, `descripcion`, `igv`, `tipo`)
-                    VALUES (:ruc, :razon_social, :nro_factura, :fecha_consumo, :nombre, 'Consumo', :cantidad, :precio, :descripcion, :igv, :tipo)";
+                    (`ruc`, `razon_social`, `nro_factura`, `fecha_consumo`, `nombre_consumo`, `tipo_consumo`, `precio_consumo`, `descripcion`, `igv`, `tipo`, `descuento`)
+                    VALUES (:ruc, :razon_social, :nro_factura, :fecha_consumo, :nombre, 'Consumo', :precio, :descripcion, :igv, :tipo, :descuento)";
 
             // Preparamos la consulta SQL
             $stmt = $this->conn->prepare($sql);
@@ -36,11 +36,11 @@ class RegistrarConsumoModel
                 ':nro_factura' => $this->data['nro_factura'],
                 ':fecha_consumo' => $this->data['fecha_consumo'],
                 ':nombre' => $this->data['nombre'],
-                ':cantidad' => $this->data['cantidad'],
                 ':precio' => $this->data['precio'],
                 ':descripcion' => $this->data['descripcion'],
                 ':igv' => $this->data['igv'],
-                ':tipo' => $this->data['tipo']
+                ':tipo' => $this->data['tipo'],
+                ':descuento' => $this->data['descuento']
             ]);
         } catch (PDOException $e) {
             // Si ocurre un error, mostramos el mensaje
